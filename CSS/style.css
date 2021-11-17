@@ -11,12 +11,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("D:/Working On/Websites/ROConsultants/Images/background.jpg");
-  /* background: radial-gradient(
-      circle,
-      var(--background) 0%,
-      var(--background2) 80%
-    ); */
+  background-image: url("../images/background.jpg");
 }
 
 * {
@@ -24,7 +19,6 @@ body {
   margin: 0;
 }
 
-/* ? Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -46,7 +40,6 @@ body {
   background: #2d1d3aa6;
 }
 
-/* ? Navigation Bar */
 .navContainer {
   width: 100%;
   margin-top: 0.5em;
@@ -84,7 +77,6 @@ body {
   text-align: center;
 }
 
-/*? Main Text */
 .main {
   width: 100%;
   margin: auto;
@@ -139,7 +131,6 @@ body {
   text-align: center;
 }
 
-/*? div Boxes */
 .divBoxContainer {
   margin-top: 10em;
 }
