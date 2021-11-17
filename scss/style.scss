@@ -1,0 +1,150 @@
+//? Sass code by Harold.
+@import "stylings/defaults";
+
+/*? Main */
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("D:/Working On/Websites/ROConsultants/Images/background.jpg");
+  /* background: radial-gradient(
+      circle,
+      var(--background) 0%,
+      var(--background2) 80%
+    ); */
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* ? Scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $background;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $background2;
+  @include border(20px, 3px, $border);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $backgroundOp;
+}
+
+/* ? Navigation Bar */
+.navContainer {
+  width: 100%;
+  margin-top: 0.5em;
+  padding-bottom: 50em;
+
+  .navTexts {
+    width: 100%;
+    margin: auto;
+    padding: 1em;
+  }
+
+  .logo {
+    @include defaultText(2em, left, $text, 1px);
+  }
+
+  .navBtn {
+    transition: 250ms;
+    margin-top: 1em;
+    font-family: "Courier New", Courier, monospace;
+    @include defaultText(1em, center, $text, 1px);
+
+    &:hover {
+      transition: 250ms;
+      cursor: pointer;
+      @include defaultText(1em, center, $selected, 3px);
+    }
+  }
+}
+
+/*? Main Text */
+.main {
+  width: 100%;
+  margin: auto;
+  margin-top: 20em;
+  @include defaultText(1em, left, $text, 1px);
+
+  .mainText {
+    @include defaultText(4em, left, $text, 1px);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .subText {
+    width: 100%;
+    margin: auto;
+    @include defaultText(1.3em, left, $subText, 3px);
+    margin-top: 1em;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .mainBtn {
+    transition: 250ms;
+    margin-top: 2em;
+    padding: 0.8em;
+    @include defaultText(1em, center, $text, 3px);
+    @include border(6px, 0px, $border);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: $unselected;
+
+    &:hover {
+      transition: 250ms;
+      background-color: $selected;
+      border-radius: 10px;
+      @include defaultText(1em, center, $text, 6px);
+    }
+  }
+}
+
+/*? div Boxes */
+.divBoxContainer {
+  margin-top: 10em;
+
+  .divBox {
+    transition: 250ms;
+    text-align: center;
+    margin-top: 2em;
+    background-color: $backgroundOp;
+    @include border(16px, 1px, $border);
+
+    &:hover {
+      transition: 250ms;
+      @include border(20px, 1px, $selected);
+      cursor: pointer;
+    }
+
+    .chat {
+      margin-top: 0.5em;
+      @include defaultText(6em, center, $text, 1px);
+    }
+
+    .textBox {
+      margin-top: 1em;
+      margin-bottom: 1.5em;
+      @include defaultText(1.5em, center, $text, 1px);
+    }
+  }
+}

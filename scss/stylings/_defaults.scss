@@ -1,0 +1,38 @@
+@use "sass:map";
+
+//? Variables
+
+$text: rgb(255, 255, 255);
+$subText: rgb(151, 151, 151);
+$background: #5f527a;
+$background2: #2d1d3a;
+$backgroundOp: #2d1d3aa6;
+$selected: rgb(255, 194, 115);
+$unselected: rgb(68, 94, 151);
+$border: #473555;
+
+//Default Text.
+@mixin defaultText($fontSize, $align, $color, $spacing) {
+  color: $color;
+  font-size: $fontSize;
+  letter-spacing: $spacing;
+  font-weight: bold;
+  text-align: $align;
+  //   text-shadow: 4px 4px 8px $background;
+
+  @content;
+}
+
+//Min and Max sizes.
+@mixin minMax($minH, $maxH, $minW, $maxW) {
+  min-height: $minH;
+  max-height: $maxH;
+  min-width: $minW;
+  max-width: $maxW;
+}
+
+//Border settings.
+@mixin border($radius, $width, $color) {
+  border-radius: $radius;
+  border: $width solid $color;
+}
