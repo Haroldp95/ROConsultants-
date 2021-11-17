@@ -4,11 +4,14 @@
     --lightOrange: #ffffff;
   }
 
+  .texts {
+    width: 100%;
+    margin: auto;
+    margin-top: 2em;
+    text-align: center;
+  }
+
 .title {
-  width: 100%;
-  margin: auto;
-  margin-top: 2em;
-  text-align: center;
   font-size: 4em;
   color: var(-text);
   font-family: Roboto;
