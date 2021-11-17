@@ -3,8 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>Consulting</title>
+  <!--CSS-->
+  <link rel="stylesheet" href="CSS/styles.css">
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   
   <!--Bootstrap-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -19,15 +22,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
-    <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="C:\Users\harol\Documents\Websites\ROConsultants\CSS\styles.css" >
+    
 
 </head>
 <body>
-    <div class="container-fluid cont">
-      <div class="texts">
+
+  <!--?Navigation Bar-->
+    <div class="container-fluid navContainer">
+      <div class="navTexts">
         <div class="row">
-          <div class="col-md-3 title">
+          <div class="col-md-3 logo">
             <h1><i class="fas fa-user-friends"></i> ROConsultants </h1>
           </div>
   
@@ -35,16 +39,14 @@
   
           </div>
           
-          <div class="col-md-1 nav">
+          <div class="col-md-1 navBtn">
             <p><i class="fas fa-home"></i> Home</p>
-            <p>&nbsp;&nbsp;&nbsp; |</p>
           </div>
-          <div class="col-md-1 nav">
-            <p><i class="fas fa-home"></i> Home</p>
-            <p>&nbsp;&nbsp;&nbsp; |</p>
+          <div class="col-md-1 navBtn">
+            <p><i class="fas fa-file-signature"></i> Contact</p>
           </div>
-          <div class="col-md-1 nav">
-            <p><i class="fas fa-home"></i> Home</p>
+          <div class="col-md-1 navBtn">
+            <p><i class="fas fa-address-card"></i> About</p>
           </div>
           
           </div>
@@ -53,30 +55,66 @@
             <div class="col-md-8">
   
             </div>
-            <div class="col-md-8">
-              <p class="mainText">Consulting with a smile.</p>
-            </div>
         </div>
       </div>
-      
 
-        
+      <!--?Main Text-->
 
       <div class="row main">
         <div class="col-md-1">
 
         </div>
-        <div class="col-md-6">
-          <p class="mainText">We specialize in consulting.<p>
+        <div class="col-md-11">
+          <p class="mainText">Consulting to Boost<p>
         </div>
-        <div class="col-md-5">
-          
+        <div class="col-md-1">
+
         </div>
-      
+        <div class="col-md-11">
+          <p class="mainText">Performance to the Stars!<p>
+          </div>
+
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-11">
+          <p class="subText">For anyone in consultation need.<p>
+        </div>
+
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-11">
+          <button class="btn-primary btn mainBtn"><i class="fas fa-book"></i> Read More
+        </div>
     </div>
 
-<!--Studenten lijst JS-->
-<script src="C:\Users\harol\Documents\Websites\ROConsultants\Javascript\index.js"></script>
+    <!--? Div Boxes-->
+  
+    <div class="container-fluid divBoxContainer">
+      <div class="row">
+        <div class="col-md-1">
+          
+        </div>
+        <div class="col-md-2">
+          <div class="divBox">
+            <i class="chat fab fa-rocketchat"></i>
+            <p class="textBox">Chat with us...</p>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div class="divBox">
+            <i class="chat fas fa-satellite"></i>
+            <p class="textBox">Fill in a Form...</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+<!--Script JS-->
+<script src="Javascript\index.js"></script>
 </body>
 
 </html>

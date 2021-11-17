@@ -1,57 +1,184 @@
+/*? Variables */
 :root {
-    --text: rgb(255, 255, 255);
-    --background: #574c64;
-    --background2: #362f3d;
-    --border: #c7c7c7;
-    --navbar: #df5d07;
-  }
+  --text: rgb(255, 255, 255);
+  --subText: rgb(151, 151, 151);
+  --background: #5f527a;
+  --background2: #2d1d3a;
+  --backgroundOp: #2d1d3aa6;
+  --selected: rgb(255, 194, 115);
+  --unselected: rgb(68, 94, 151);
+  --border: #473555;
+}
 
-  html {
-    height: 100%;
-  }
+/*? Main */
 
-  body {
-    height: 100%;
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background: linear-gradient(0deg, var(--background) 0%, var(--background2) 80%);
-  }
+html {
+  height: 100%;
+}
 
-  p {
-    color: var(--text);
-    font-family: Roboto;
-  }
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
 
-  .cont {
-    width: 100%;
-    margin: auto;
-  }
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("D:/Working On/Websites/ROConsultants/Images/background.jpg");
+  /* background: radial-gradient(
+    circle,
+    var(--background) 0%,
+    var(--background2) 80%
+  ); */
+}
 
-  .texts {
-    width: 100%;
-    margin: auto;
-    color: var(--text);
-    font-family: Roboto;
-    font-weight: bold;
-    padding: 1em;
-    border-bottom: .5px dotted var(--border);
-    background-color: var(--navbar);
-  }
+* {
+  padding: 0;
+  margin: 0;
+}
 
-  .title {
-    font-size: 2em;
-    text-align: left;
-  }
+/* ? Scrollbar */
 
-  .nav {
-    margin-top: .7em;
-    text-align: center;
-  }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-  .main {
-    width: 100%;
-    margin: auto;
-    font-size: 2em;
-    margin-top: 5em;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--background2);
+  border: 3px solid var(--border);
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--backgroundOp);
+}
+
+/* ? Navigation Bar */
+.navContainer {
+  width: 100%;
+  margin-top: 0.5em;
+  padding-bottom: 50em;
+}
+
+.navTexts {
+  width: 100%;
+  margin: auto;
+  color: var(--text);
+  font-weight: bold;
+  padding: 1em;
+  color: var(--text);
+}
+
+.logo {
+  font-size: 2em;
+  text-align: left;
+  color: var(--text);
+}
+
+.navBtn {
+  transition: 250ms;
+  margin-top: 1em;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  color: var(--text);
+}
+
+.navBtn:hover {
+  transition: 250ms;
+  color: var(--selected);
+  cursor: pointer;
+  letter-spacing: 3px;
+}
+
+/*? Main Text */
+.main {
+  width: 100%;
+  margin: auto;
+  margin-top: 20em;
+  text-align: left;
+}
+
+.mainText {
+  color: var(--text);
+  font-size: 4em;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.subText {
+  width: 100%;
+  margin: auto;
+  color: var(--subText);
+  font-size: 1.3em;
+  margin-top: 1em;
+  text-align: left;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mainBtn {
+  transition: 250ms;
+  margin-top: 2em;
+  padding: 0.8em;
+  color: var(--text);
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 3px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--unselected);
+  border: none;
+  border-radius: 6px;
+  /* box-shadow: 5px 10px 8px rgba(0, 0, 0, 0.116); */
+}
+
+.mainBtn:hover {
+  transition: 250ms;
+  background-color: var(--selected);
+  border-radius: 10px;
+  letter-spacing: 6px;
+}
+
+/* div Boxes */
+
+.divBoxContainer {
+  margin-top: 10em;
+}
+
+.divBox {
+  transition: 250ms;
+  text-align: center;
+  margin-top: 2em;
+  background-color: var(--backgroundOp);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.divBox:hover {
+  transition: 250ms;
+  border-radius: 40px;
+  border: 1px solid var(--selected);
+  cursor: pointer;
+}
+
+.chat {
+  margin-top: 0.5em;
+  font-size: 6em;
+  color: var(--text);
+}
+
+.textBox {
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  font-size: 1.5em;
+  color: var(--text);
+  font-weight: bold;
+}
