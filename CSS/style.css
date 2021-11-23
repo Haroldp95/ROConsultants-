@@ -42,13 +42,11 @@
   margin-right: 91.66666663%;
 }
 
-/*? Main */
 html {
   height: 100%;
   scroll-behavior: smooth;
   width: 100%;
   padding: 0%;
-  overflow-y: hidden;
   background-color: #231f2b;
 }
 
@@ -91,7 +89,6 @@ body {
 
 .navContainer {
   width: 100%;
-  padding-bottom: 50em;
 }
 .navContainer .navTexts {
   width: 100%;

@@ -1,3 +1,5 @@
+//* Javascript by Harold.
+
 //? Click event listener
 object.addEventListener("click", toHome);
 
