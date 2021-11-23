@@ -23,3 +23,20 @@ function toLogin() {
     //Change Class.
     document.getElementById("login").className = "login";
 }
+
+function navigate($link) {
+    switch($link) {
+        case "Contact":
+            location.replace("./Webpages/contact.php");
+            break;
+        case "About":
+            location.replace("./Webpages/aboutus.php");
+            break;
+        case "License":
+            location.replace("./Webpages/license.php");
+            break;
+        case "Privacy":
+            location.replace("./Webpages/privacy.php");
+            break;
+    }
+}
