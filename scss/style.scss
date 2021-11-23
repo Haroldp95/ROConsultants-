@@ -73,6 +73,14 @@ body {
       cursor: pointer;
       letter-spacing: 3px;
     }
+
+    @include mq(L) {
+      font-size: 2em;
+    }
+
+    @include mq(XL) {
+      font-size: 3em;
+    }
   }
 
   .navBtn {
@@ -85,6 +93,22 @@ body {
       transition: 250ms;
       cursor: pointer;
       @include defaultText(1em, center, $selected, 3px);
+
+      @include mq(L) {
+        font-size: 0.8em;
+      }
+
+      @include mq(XL) {
+        font-size: 1em;
+      }
+    }
+
+    @include mq(L) {
+      font-size: 0.8em;
+    }
+
+    @include mq(XL) {
+      font-size: 1em;
     }
 
     .login {
@@ -93,10 +117,26 @@ body {
       @include defaultText(1em, center, $text, 1px);
       color: $selected;
 
+      @include mq(L) {
+        font-size: 0.8em;
+      }
+
+      @include mq(XL) {
+        font-size: 1em;
+      }
+
       :hover {
         transition: 250ms;
         cursor: pointer;
         @include defaultText(1em, center, $text, 3px);
+
+        @include mq(L) {
+          font-size: 0.8em;
+        }
+
+        @include mq(XL) {
+          font-size: 1em;
+        }
       }
     }
   }
@@ -109,9 +149,25 @@ body {
   margin-top: 12em;
   @include defaultText(1em, left, $text, 1px);
 
+  @include mq(L) {
+    margin-top: 6em;
+  }
+
+  @include mq(XL) {
+    margin-top: 12em;
+  }
+
   .mainText {
     @include defaultText(4em, left, $text, 1px);
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    @include mq(L) {
+      font-size: 3em;
+    }
+
+    @include mq(XL) {
+      font-size: 4em;
+    }
   }
 
   .subText {
@@ -120,6 +176,14 @@ body {
     @include defaultText(1.3em, left, $subText, 3px);
     margin-top: 1em;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    @include mq(L) {
+      font-size: 1em;
+    }
+
+    @include mq(XL) {
+      font-size: 1.3em;
+    }
   }
 
   .mainBtn {
@@ -131,11 +195,61 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background-color: $unselected;
 
+    @include mq(L) {
+      font-size: 0.8em;
+    }
+
+    @include mq(XL) {
+      font-size: 1em;
+    }
+
     &:hover {
       transition: 250ms;
       background-color: $selected;
       border-radius: 10px;
       @include defaultText(1em, center, $text, 6px);
+
+      @include mq(L) {
+        font-size: 0.8em;
+      }
+
+      @include mq(XL) {
+        font-size: 1em;
+      }
+    }
+
+    &Two {
+      margin-left: 1em;
+      transition: 250ms;
+      margin-top: 3em;
+      padding: 0.8em 1.2em 0.8em 1.2em;
+      @include defaultText(1em, center, $text, 3px);
+      @include border(20px, 0px, $border);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: $selected;
+
+      @include mq(L) {
+        font-size: 0.8em;
+      }
+
+      @include mq(XL) {
+        font-size: 1em;
+      }
+
+      &:hover {
+        transition: 250ms;
+        background-color: $unselected;
+        border-radius: 10px;
+        @include defaultText(1em, center, $text, 6px);
+
+        @include mq(L) {
+          font-size: 0.8em;
+        }
+
+        @include mq(XL) {
+          font-size: 1em;
+        }
+      }
     }
   }
 }
@@ -160,12 +274,28 @@ body {
     .chat {
       margin-top: 0.5em;
       @include defaultText(6em, center, $text, 1px);
+
+      @include mq(L) {
+        font-size: 4em;
+      }
+
+      @include mq(XL) {
+        font-size: 6em;
+      }
     }
 
     .textBox {
       margin-top: 1em;
       margin-bottom: 1.5em;
       @include defaultText(1.5em, center, $text, 1px);
+
+      @include mq(L) {
+        font-size: 1em;
+      }
+
+      @include mq(XL) {
+        font-size: 1.5em;
+      }
     }
   }
 }
@@ -176,12 +306,28 @@ body {
   width: 100%;
   margin: 0%;
   margin-top: 8.5em;
+
+  @include mq(L) {
+    margin-top: 4em;
+  }
+
+  @include mq(XL) {
+    margin-top: 8.5em;
+  }
 }
 
 //? Footer
 
 .footerDiv {
   margin-top: 2em;
+
+  @include mq(L) {
+    margin-top: 1em;
+  }
+
+  @include mq(XL) {
+    margin-top: 2em;
+  }
 
   .footerBtn {
     transition: 250ms;

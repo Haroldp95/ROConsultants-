@@ -1,3 +1,5 @@
+@use "sass:map";
+
 //? Variables
 
 $text: rgb(255, 255, 255);
@@ -5,9 +7,34 @@ $subText: rgb(151, 151, 151);
 $background: #231f2b;
 $background2: #2d1d3a;
 $backgroundOp: #1a161d3d;
-$selected: rgb(255, 194, 115);
+$selected: rgb(212, 148, 64);
 $unselected: rgb(68, 94, 151);
 $border: #2f2a33;
+
+//? Screen Sizes
+$screenSizes: (
+  XS: 576px,
+  S: 768px,
+  M: 992px,
+  L: 1300px,
+  XL: 2160px,
+);
+
+//? Bootstrap offset on right.
+@for $i from 1 to 12 {
+  .offset-right-#{$i} {
+    margin-right: (8.33333333% * $i);
+  }
+}
+
+//? Media Queries.
+@mixin mq($screenSize) {
+  $size: map.get($screenSizes, $screenSize);
+
+  @media (min-width: $size) {
+    @content;
+  }
+}
 
 //? Default Text.
 @mixin defaultText($fontSize, $align, $color, $spacing) {

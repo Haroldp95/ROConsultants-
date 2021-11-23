@@ -1,3 +1,47 @@
+.offset-right-1 {
+  margin-right: 8.33333333%;
+}
+
+.offset-right-2 {
+  margin-right: 16.66666666%;
+}
+
+.offset-right-3 {
+  margin-right: 24.99999999%;
+}
+
+.offset-right-4 {
+  margin-right: 33.33333332%;
+}
+
+.offset-right-5 {
+  margin-right: 41.66666665%;
+}
+
+.offset-right-6 {
+  margin-right: 49.99999998%;
+}
+
+.offset-right-7 {
+  margin-right: 58.33333331%;
+}
+
+.offset-right-8 {
+  margin-right: 66.66666664%;
+}
+
+.offset-right-9 {
+  margin-right: 74.99999997%;
+}
+
+.offset-right-10 {
+  margin-right: 83.3333333%;
+}
+
+.offset-right-11 {
+  margin-right: 91.66666663%;
+}
+
 /*? Main */
 html {
   height: 100%;
@@ -64,9 +108,19 @@ body {
 }
 .navContainer .logo :hover {
   transition: 500ms;
-  color: #ffc273;
+  color: #d49440;
   cursor: pointer;
   letter-spacing: 3px;
+}
+@media (min-width: 1300px) {
+  .navContainer .logo {
+    font-size: 2em;
+  }
+}
+@media (min-width: 2160px) {
+  .navContainer .logo {
+    font-size: 3em;
+  }
 }
 .navContainer .navBtn {
   transition: 250ms;
@@ -81,11 +135,31 @@ body {
 .navContainer .navBtn:hover {
   transition: 250ms;
   cursor: pointer;
-  color: #ffc273;
+  color: #d49440;
   font-size: 1em;
   letter-spacing: 3px;
   font-weight: bold;
   text-align: center;
+}
+@media (min-width: 1300px) {
+  .navContainer .navBtn:hover {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .navContainer .navBtn:hover {
+    font-size: 1em;
+  }
+}
+@media (min-width: 1300px) {
+  .navContainer .navBtn {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .navContainer .navBtn {
+    font-size: 1em;
+  }
 }
 .navContainer .navBtn .login {
   transition: 250ms;
@@ -95,7 +169,17 @@ body {
   letter-spacing: 1px;
   font-weight: bold;
   text-align: center;
-  color: #ffc273;
+  color: #d49440;
+}
+@media (min-width: 1300px) {
+  .navContainer .navBtn .login {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .navContainer .navBtn .login {
+    font-size: 1em;
+  }
 }
 .navContainer .navBtn .login :hover {
   transition: 250ms;
@@ -105,6 +189,16 @@ body {
   letter-spacing: 3px;
   font-weight: bold;
   text-align: center;
+}
+@media (min-width: 1300px) {
+  .navContainer .navBtn .login :hover {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .navContainer .navBtn .login :hover {
+    font-size: 1em;
+  }
 }
 
 .main {
@@ -117,6 +211,16 @@ body {
   font-weight: bold;
   text-align: left;
 }
+@media (min-width: 1300px) {
+  .main {
+    margin-top: 6em;
+  }
+}
+@media (min-width: 2160px) {
+  .main {
+    margin-top: 12em;
+  }
+}
 .main .mainText {
   color: white;
   font-size: 4em;
@@ -124,6 +228,16 @@ body {
   font-weight: bold;
   text-align: left;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+@media (min-width: 1300px) {
+  .main .mainText {
+    font-size: 3em;
+  }
+}
+@media (min-width: 2160px) {
+  .main .mainText {
+    font-size: 4em;
+  }
 }
 .main .subText {
   width: 100%;
@@ -135,6 +249,16 @@ body {
   text-align: left;
   margin-top: 1em;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+@media (min-width: 1300px) {
+  .main .subText {
+    font-size: 1em;
+  }
+}
+@media (min-width: 2160px) {
+  .main .subText {
+    font-size: 1.3em;
+  }
 }
 .main .mainBtn {
   transition: 250ms;
@@ -150,15 +274,80 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #445e97;
 }
+@media (min-width: 1300px) {
+  .main .mainBtn {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .main .mainBtn {
+    font-size: 1em;
+  }
+}
 .main .mainBtn:hover {
   transition: 250ms;
-  background-color: #ffc273;
+  background-color: #d49440;
   border-radius: 10px;
   color: white;
   font-size: 1em;
   letter-spacing: 6px;
   font-weight: bold;
   text-align: center;
+}
+@media (min-width: 1300px) {
+  .main .mainBtn:hover {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .main .mainBtn:hover {
+    font-size: 1em;
+  }
+}
+.main .mainBtnTwo {
+  margin-left: 1em;
+  transition: 250ms;
+  margin-top: 3em;
+  padding: 0.8em 1.2em 0.8em 1.2em;
+  color: white;
+  font-size: 1em;
+  letter-spacing: 3px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 20px;
+  border: 0px solid #2f2a33;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #d49440;
+}
+@media (min-width: 1300px) {
+  .main .mainBtnTwo {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .main .mainBtnTwo {
+    font-size: 1em;
+  }
+}
+.main .mainBtnTwo:hover {
+  transition: 250ms;
+  background-color: #445e97;
+  border-radius: 10px;
+  color: white;
+  font-size: 1em;
+  letter-spacing: 6px;
+  font-weight: bold;
+  text-align: center;
+}
+@media (min-width: 1300px) {
+  .main .mainBtnTwo:hover {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .main .mainBtnTwo:hover {
+    font-size: 1em;
+  }
 }
 
 .divBoxContainer {
@@ -175,7 +364,7 @@ body {
 .divBoxContainer .divBox:hover {
   transition: 250ms;
   border-radius: 20px;
-  border: 1px solid #ffc273;
+  border: 1px solid #d49440;
   cursor: pointer;
 }
 .divBoxContainer .divBox .chat {
@@ -186,6 +375,16 @@ body {
   font-weight: bold;
   text-align: center;
 }
+@media (min-width: 1300px) {
+  .divBoxContainer .divBox .chat {
+    font-size: 4em;
+  }
+}
+@media (min-width: 2160px) {
+  .divBoxContainer .divBox .chat {
+    font-size: 6em;
+  }
+}
 .divBoxContainer .divBox .textBox {
   margin-top: 1em;
   margin-bottom: 1.5em;
@@ -195,6 +394,16 @@ body {
   font-weight: bold;
   text-align: center;
 }
+@media (min-width: 1300px) {
+  .divBoxContainer .divBox .textBox {
+    font-size: 1em;
+  }
+}
+@media (min-width: 2160px) {
+  .divBoxContainer .divBox .textBox {
+    font-size: 1.5em;
+  }
+}
 
 .bar {
   background: #2f2a33;
@@ -203,9 +412,29 @@ body {
   margin: 0%;
   margin-top: 8.5em;
 }
+@media (min-width: 1300px) {
+  .bar {
+    margin-top: 4em;
+  }
+}
+@media (min-width: 2160px) {
+  .bar {
+    margin-top: 8.5em;
+  }
+}
 
 .footerDiv {
   margin-top: 2em;
+}
+@media (min-width: 1300px) {
+  .footerDiv {
+    margin-top: 1em;
+  }
+}
+@media (min-width: 2160px) {
+  .footerDiv {
+    margin-top: 2em;
+  }
 }
 .footerDiv .footerBtn {
   transition: 250ms;
@@ -220,7 +449,7 @@ body {
 .footerDiv .footerBtn:hover {
   transition: 250ms;
   cursor: pointer;
-  color: #ffc273;
+  color: #d49440;
   font-size: 0.8em;
   letter-spacing: 3px;
   font-weight: bold;
