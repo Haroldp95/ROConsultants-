@@ -4,10 +4,10 @@ $text: rgb(255, 255, 255);
 $subText: rgb(151, 151, 151);
 $background: #5f527a;
 $background2: #2d1d3a;
-$backgroundOp: #2d1d3aa6;
+$backgroundOp: #1a161d3d;
 $selected: rgb(255, 194, 115);
 $unselected: rgb(68, 94, 151);
-$border: #473555;
+$border: #2f2a33;
 
 //? Default Text.
 @mixin defaultText($fontSize, $align, $color, $spacing) {
