@@ -6,6 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  //? Links to Add
+  navigations = [
+    { name: 'Contact', icon: 'fas fa-file-signature', user: 'Harold de Boer' },
+    { name: 'Over Ons', icon: 'fas fa-address-card', user: 'Daan Smets' },
+    {
+      name: 'Licenties',
+      icon: 'fas fa-id-badge',
+      user: 'Arend Kijkt in de Vegte',
+    },
+    {
+      name: 'Privacy & Data',
+      icon: 'fas fa-user-secret',
+      user: '@2021 Deltion Zwolle',
+    },
+  ];
+
   constructor() {}
 
   ngOnInit() {}
@@ -24,6 +40,20 @@ export class FooterComponent implements OnInit {
         break;
       case 'Privacy':
         location.replace('./Webpages/privacy.php');
+        break;
+    }
+  }
+
+  //? Switch on different links.
+  toPage(name) {
+    switch (name) {
+      case 'Contact':
+        break;
+      case 'Licenties':
+        break;
+      case 'Licenties':
+        break;
+      case 'Privacy & Data':
         break;
     }
   }

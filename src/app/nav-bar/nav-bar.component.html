@@ -10,21 +10,15 @@
 
       <div class="col-md-6"></div>
 
-      <div class="col-md-1 navBtn">
-        <p (click)="toHome()"><i class="fas fa-home"></i> Home</p>
-      </div>
-      <div class="col-md-1 navBtn">
-        <p><i class="fas fa-file-signature"></i> Contact</p>
-      </div>
-      <div class="col-md-1 navBtn">
-        <p (click)="toLogin()" id="login">
-          <i class="fas fa-address-card"></i> Inloggen
+      <div
+        class="navBtn col-md-1"
+        id="{{ nav.id }}"
+        *ngFor="let nav of navigations; let i = index"
+      >
+        <p (click)="toPage(nav.name)">
+          <i class="{{ nav.icon }}"></i> {{ nav.name }}
         </p>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8"></div>
     </div>
   </div>
 </div>

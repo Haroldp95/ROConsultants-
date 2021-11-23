@@ -2,55 +2,17 @@
 <div class="bar"></div>
 
 <div class="container-fluid footerDiv">
-  <div class="row">
+  <div class="row" *ngFor="let nav of navigations; let i = index">
     <div class="col-md-1"></div>
-    <div class="col-md-6">
-      <p class="footerBtn" (click)="navigate('Contact')">
-        <i class="fas fa-file-signature"></i> Contact
+    <div class="footerBtn col-md-6">
+      <p (click)="toPage(nav.name)">
+        <i class="{{ nav.icon }}"></i> {{ nav.name }}
       </p>
     </div>
-    <div class="col-md-3"></div>
-    <div class="col-md-2">
-      <p class="footerBtnStatic">Harold de Boer</p>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-6">
-      <p class="footerBtn" (click)="navigate('About')">
-        <i class="fas fa-address-card"></i> Over Ons
-      </p>
-    </div>
     <div class="col-md-3"></div>
     <div class="col-md-2">
-      <p class="footerBtnStatic">Daan Smets</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-6">
-      <p class="footerBtn" (click)="navigate('License')">
-        <i class="fas fa-id-badge"></i> Licenties
-      </p>
-    </div>
-    <div class="col-md-3"></div>
-    <div class="col-md-2">
-      <p class="footerBtnStatic">Arend Kijk in De Vegte</p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-6">
-      <p class="footerBtn" (click)="navigate('Privacy')">
-        <i class="fas fa-user-secret"></i> Privacy & Data
-      </p>
-    </div>
-    <div class="col-md-3"></div>
-    <div class="col-md-2">
-      <p class="footerBtnStatic">@2021 - Deltion</p>
+      <p class="footerBtnStatic">{{ nav.user }}</p>
     </div>
   </div>
 </div>

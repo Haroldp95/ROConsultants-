@@ -36,6 +36,8 @@
   .navBtn {
     transition: 250ms;
     margin-top: 1em;
+    display: flex;
+    flex-direction: row;
     font-family: "Courier New", Courier, monospace;
     @include defaultText(1em, center, $text, 1px);
 
@@ -61,16 +63,33 @@
       }
     }
 
-    .login {
+    &Login {
       transition: 250ms;
+      margin-top: 1em;
       font-family: "Courier New", Courier, monospace;
       @include defaultText(1em, center, $text, 1px);
       color: $selected;
+
+      @include mq(L) {
+        font-size: 0.8em;
+      }
+
+      @include mq(XL) {
+        font-size: 1em;
+      }
 
       &:hover {
         transition: 250ms;
         cursor: pointer;
         @include defaultText(1em, center, $text, 3px);
+
+        @include mq(L) {
+          font-size: 0.8em;
+        }
+
+        @include mq(XL) {
+          font-size: 1em;
+        }
       }
     }
   }

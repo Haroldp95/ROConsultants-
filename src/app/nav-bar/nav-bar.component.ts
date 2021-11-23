@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
+  navigations = [
+    { name: 'Home', icon: 'fas fa-home' },
+    { name: 'Contact', icon: 'fas fa-file-signature' },
+    { name: 'Inloggen', icon: 'fas fa-address-card', id: 'login' },
+  ];
+
   constructor() {}
 
   ngOnInit() {}
@@ -18,17 +24,25 @@ export class NavBarComponent implements OnInit {
 
   //? Open Login Screen.
   toLogin() {
-    //Clear innertext
-    document.getElementById('login').innerText = '';
-
-    //Add Icon and new text.
-    var tag = document.createElement('i');
-    tag.className = 'fas fa-user-alt';
-    tag.innerText = ' Uitloggen';
-    var element = document.getElementById('login');
-    element.appendChild(tag);
+    this.navigations[2].name = 'Uitloggen';
+    this.navigations[2].icon = 'fas fa-user';
 
     //Change Class.
-    document.getElementById('login').className = 'login';
+    document.getElementById('login').className = ' col-md-1 navBtnLogin';
+  }
+
+  //? Switch on different links.
+  toPage(name) {
+    switch (name) {
+      case 'Home':
+        this.toHome();
+        break;
+      case 'Contact':
+        this.toHome();
+        break;
+      case 'Inloggen':
+        this.toLogin();
+        break;
+    }
   }
 }
