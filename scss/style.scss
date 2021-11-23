@@ -89,6 +89,14 @@ body {
     font-family: "Courier New", Courier, monospace;
     @include defaultText(1em, center, $text, 1px);
 
+    @include mq(L) {
+      font-size: 0.8em;
+    }
+
+    @include mq(XL) {
+      font-size: 1em;
+    }
+
     &:hover {
       transition: 250ms;
       cursor: pointer;
@@ -103,40 +111,16 @@ body {
       }
     }
 
-    @include mq(L) {
-      font-size: 0.8em;
-    }
-
-    @include mq(XL) {
-      font-size: 1em;
-    }
-
     .login {
       transition: 250ms;
       font-family: "Courier New", Courier, monospace;
       @include defaultText(1em, center, $text, 1px);
       color: $selected;
 
-      @include mq(L) {
-        font-size: 0.8em;
-      }
-
-      @include mq(XL) {
-        font-size: 1em;
-      }
-
-      :hover {
+      &:hover {
         transition: 250ms;
         cursor: pointer;
         @include defaultText(1em, center, $text, 3px);
-
-        @include mq(L) {
-          font-size: 0.8em;
-        }
-
-        @include mq(XL) {
-          font-size: 1em;
-        }
       }
     }
   }
@@ -308,7 +292,7 @@ body {
   margin-top: 8.5em;
 
   @include mq(L) {
-    margin-top: 4em;
+    margin-top: 4.5em;
   }
 
   @include mq(XL) {
@@ -342,8 +326,10 @@ body {
     }
 
     &Static {
+      font-family: "Courier New", Courier, monospace;
       @include defaultText(0.8em, left, $subText, 1px);
       user-select: none;
+      margin-top: 1em;
     }
   }
 }

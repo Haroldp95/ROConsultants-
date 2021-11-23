@@ -132,6 +132,16 @@ body {
   font-weight: bold;
   text-align: center;
 }
+@media (min-width: 1300px) {
+  .navContainer .navBtn {
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 2160px) {
+  .navContainer .navBtn {
+    font-size: 1em;
+  }
+}
 .navContainer .navBtn:hover {
   transition: 250ms;
   cursor: pointer;
@@ -151,16 +161,6 @@ body {
     font-size: 1em;
   }
 }
-@media (min-width: 1300px) {
-  .navContainer .navBtn {
-    font-size: 0.8em;
-  }
-}
-@media (min-width: 2160px) {
-  .navContainer .navBtn {
-    font-size: 1em;
-  }
-}
 .navContainer .navBtn .login {
   transition: 250ms;
   font-family: "Courier New", Courier, monospace;
@@ -171,17 +171,7 @@ body {
   text-align: center;
   color: #d49440;
 }
-@media (min-width: 1300px) {
-  .navContainer .navBtn .login {
-    font-size: 0.8em;
-  }
-}
-@media (min-width: 2160px) {
-  .navContainer .navBtn .login {
-    font-size: 1em;
-  }
-}
-.navContainer .navBtn .login :hover {
+.navContainer .navBtn .login:hover {
   transition: 250ms;
   cursor: pointer;
   color: white;
@@ -189,16 +179,6 @@ body {
   letter-spacing: 3px;
   font-weight: bold;
   text-align: center;
-}
-@media (min-width: 1300px) {
-  .navContainer .navBtn .login :hover {
-    font-size: 0.8em;
-  }
-}
-@media (min-width: 2160px) {
-  .navContainer .navBtn .login :hover {
-    font-size: 1em;
-  }
 }
 
 .main {
@@ -414,7 +394,7 @@ body {
 }
 @media (min-width: 1300px) {
   .bar {
-    margin-top: 4em;
+    margin-top: 4.5em;
   }
 }
 @media (min-width: 2160px) {
@@ -456,12 +436,14 @@ body {
   text-align: left;
 }
 .footerDiv .footerBtnStatic {
+  font-family: "Courier New", Courier, monospace;
   color: #979797;
   font-size: 0.8em;
   letter-spacing: 1px;
   font-weight: bold;
   text-align: left;
   user-select: none;
+  margin-top: 1em;
 }
 
 /*# sourceMappingURL=style.css.map */
