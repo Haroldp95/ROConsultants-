@@ -22,13 +22,6 @@ $screenSizes: (
   XL: 2160px,
 );
 
-//? Bootstrap offset on right.
-@for $i from 1 to 12 {
-  .offset-right-#{$i} {
-    margin-right: (8.33333333% * $i);
-  }
-}
-
 //? Media Queries.
 @mixin mq($screenSize) {
   $size: map.get($screenSizes, $screenSize);
