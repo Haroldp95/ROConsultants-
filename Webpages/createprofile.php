@@ -8,16 +8,16 @@
         <input type="text" name="lastname" id="" placeholder="Achternaam">
         <input type="text" name="nickname" id="" placeholder="Roepnaam">
         <input type="radio" name="gender" value="men" id="genderMen">
-        <label for="genderMen">Men</label>
+        <label for="genderMen">Man</label>
         <input type="radio" name="gender" value="woman" id="genderWoman">
-        <label for="genderMen">Woman</label>
+        <label for="genderMen">Vrouw</label>
         <input type="radio" name="gender" value="neutral" id="genderNeutral">
-        <label for="genderMen">Neutral</label>
+        <label for="genderMen">Neutraal</label>
         <input type="date" name="dateOfBirth" id="">
         <input type="email" name="email" id="" placeholder="Emailadres">
-        <input type="password" name="password" id="">
-        <input type="password" name="passwordRepeat" id="">
-        <input type="submit" name="createAccount" value="Create account">
+        <input type="password" name="password" id="" placeholder="Wachtwoord">
+        <input type="password" name="passwordRepeat" id="" placeholder="Herhaal wachtwoord">
+        <input type="submit" name="createAccount" value="Maak account">
     </form>
     <?php 
         //Errors
