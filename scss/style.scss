@@ -10,7 +10,6 @@ html {
   width: 100%;
   padding: 0%;
 
-  // overflow-y: hidden;
   background-color: $background;
 }
 
@@ -284,6 +283,7 @@ body {
   }
 }
 
+//? Seperation Bar
 .bar {
   background: $border;
   height: 1px;
