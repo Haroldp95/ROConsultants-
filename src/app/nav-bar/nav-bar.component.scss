@@ -1,0 +1,96 @@
+//* Sass code by Harold.
+
+//? Imports
+@import "src/assets/stylings/defaults";
+
+// ? Navigation Bar
+.navContainer {
+  width: 100%;
+
+  .navTexts {
+    width: 100%;
+    margin: auto;
+    padding: 1em;
+  }
+
+  .logo {
+    transition: 500ms;
+    @include defaultText(3em, left, $text, 1px);
+
+    :hover {
+      transition: 500ms;
+      color: $selected;
+      cursor: pointer;
+      letter-spacing: 3px;
+    }
+
+    @include mq(L) {
+      font-size: 2em;
+    }
+
+    @include mq(XL) {
+      font-size: 3em;
+    }
+  }
+
+  .navBtn {
+    transition: 250ms;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    font-family: "Courier New", Courier, monospace;
+    @include defaultText(1em, center, $text, 1px);
+
+    @include mq(L) {
+      font-size: 0.8em;
+    }
+
+    @include mq(XL) {
+      font-size: 1em;
+    }
+
+    &:hover {
+      transition: 250ms;
+      cursor: pointer;
+      @include defaultText(1em, center, $selected, 3px);
+
+      @include mq(L) {
+        font-size: 0.8em;
+      }
+
+      @include mq(XL) {
+        font-size: 1em;
+      }
+    }
+
+    &Login {
+      transition: 250ms;
+      margin-top: 1em;
+      font-family: "Courier New", Courier, monospace;
+      @include defaultText(1em, center, $text, 1px);
+      color: $selected;
+
+      @include mq(L) {
+        font-size: 0.8em;
+      }
+
+      @include mq(XL) {
+        font-size: 1em;
+      }
+
+      &:hover {
+        transition: 250ms;
+        cursor: pointer;
+        @include defaultText(1em, center, $text, 3px);
+
+        @include mq(L) {
+          font-size: 0.8em;
+        }
+
+        @include mq(XL) {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}

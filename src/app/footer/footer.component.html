@@ -1,0 +1,18 @@
+<!-- ? Footer -->
+<div class="bar"></div>
+
+<div class="container-fluid footerDiv">
+  <div class="row" *ngFor="let nav of navigations; let i = index">
+    <div class="col-md-1"></div>
+    <div class="footerBtn col-md-6">
+      <p (click)="toPage(nav.name)">
+        <i class="{{ nav.icon }}"></i> {{ nav.name }}
+      </p>
+    </div>
+
+    <div class="col-md-3"></div>
+    <div class="col-md-2">
+      <p class="footerBtnStatic">{{ nav.user }}</p>
+    </div>
+  </div>
+</div>
