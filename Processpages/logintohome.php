@@ -23,12 +23,12 @@ else
     //Invalid input
     if (empty($emailLogin) || empty($passwordLogin)) 
     {
-        header("location: ../Webpages/createprofile.php?error=emptyField");
+        header("location: ../Webpages/login.php?error=emptyField");
         exit();
     }
-    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+    else if (!filter_var($emailLogin, FILTER_VALIDATE_EMAIL)) 
     {
-        header("location: ../Webpages/createprofile.php?error=invalidEmail");
+        header("location: ../Webpages/login.php?error=invalidEmail");
         exit();
     }
 
@@ -38,7 +38,7 @@ else
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $rPassword);
     mysqli_stmt_fetch($stmt);
-    $checkPassword = password_verify($emailLogin, $rPassword);
+    $checkPassword = password_verify($passwordLogin, $rPassword);
 
     if ($checkPassword !== true) 
     {
