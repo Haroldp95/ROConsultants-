@@ -1,7 +1,7 @@
 //* Javascript by Harold.
-
+console.log("Loaded")
 //? Click event listener
-object.addEventListener("click", toHome);
+//object.addEventListener("click", toHome); deze lijn lijkt niet nodig te zijn voor de onclick eventlistener
 
 //? Open home page.
 function toHome() {
