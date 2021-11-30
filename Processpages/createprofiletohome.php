@@ -22,7 +22,8 @@ else
 
     //Connection
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-    if (!$conn) {
+    if (!$conn) 
+    {
         header("location: ../Webpages/error.php");
         exit();
     }
@@ -70,7 +71,8 @@ else
     mysqli_stmt_bind_param($stmt, 's', $email );
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
-    if (mysqli_stmt_num_rows($stmt) > 0) {
+    if (mysqli_stmt_num_rows($stmt) > 0) 
+    {
         header("location: ../Webpages/createprofile.php?error=invalidEmail");
         exit();
     }
