@@ -443,6 +443,29 @@ body {
   margin-top: 1em;
 }
 
+.navbar {
+  background-color: #eaeaea;
+  border-radius: 10px;
+  border: 1px solid #9c9c9c;
+  margin-top: -1em;
+}
+.navbar .navBarText {
+  transition: 250ms;
+  font-size: 1em;
+  text-align: center;
+  font-weight: bold;
+  color: #92a8d8;
+}
+.navbar .navBarText:hover {
+  transition: 250ms;
+  cursor: pointer;
+  color: #d49440;
+}
+.navbar .logoMid {
+  margin-left: -15em;
+  font-size: 1.3em;
+}
+
 .loginContainer {
   min-height: 50%;
   max-height: 50%;
@@ -455,7 +478,7 @@ body {
   border: 1px solid #9c9c9c;
   background-color: #eaeaea;
   margin: auto;
-  margin-top: 10em;
+  margin-top: 15em;
 }
 .loginContainer .loginText {
   margin: 1em;
@@ -487,6 +510,22 @@ body {
   text-align: center;
   font-weight: bold;
   background-color: #92a8d8;
+}
+
+.footer {
+  border-radius: 10px;
+  border: 1px solid #3a3a3a;
+  padding: 2em;
+  margin-top: 17em;
+  font-size: 1em;
+  font-weight: bold;
+  color: #92a8d8;
+  background-color: #575b5c1f;
+}
+.footer .headF {
+  color: #9c9c9c;
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
 }
 
 /*# sourceMappingURL=style.css.map */
