@@ -1,29 +1,24 @@
 //* Javascript by Harold.
 console.log("Loaded")
 //? Click event listener
-//object.addEventListener("click", toHome); deze lijn lijkt niet nodig te zijn voor de onclick eventlistener
+//object.addEventListener("click", toHome); //deze lijn lijkt niet nodig te zijn voor de onclick eventlistener
+
+pageURL = location.href;
+console.log(pageURL);
 
 //? Open home page.
 function toHome() {
-    console.log("Going Home...")
-    location.replace("./index.html")
+    if (location.href.includes("roconsultants")){
+        console.log("Going Home...")
+        location.replace("./index.html")
+    }
+
 }
 
-//? Open Login Screen.
 function toLogin() {
-
-    //Clear innertext
-    document.getElementById("login").innerText = "";
-
-    //Add Icon and new text.
-    var tag = document.createElement("i");
-    tag.className = "fas fa-user-alt";
-    tag.innerText = " Uitloggen"
-    var element = document.getElementById("login");
-    element.appendChild(tag);
-    
-    //Change Class.
-    document.getElementById("login").className = "login";
+    if (window.location.href == "/roconsultants/")
+    console.log("Going to login page...")
+    location.replace("./Webpages/login.php")
 }
 
 function navigate($link) {
