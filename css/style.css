@@ -47,7 +47,7 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   padding: 0%;
-  background-color: #231f2b;
+  background-color: #272d47;
 }
 
 body {
@@ -58,7 +58,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("../plaatjes/background.jpg");
+  background: radial-gradient(circle, #272d47 0%, #121222 100%);
 }
 
 * {
@@ -72,19 +72,19 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #231f2b;
+  background: #272d47;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #2d1d3a;
+  background: #121222;
   border-radius: 20px;
   border: 3px solid #2f2a33;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #1a161d3d;
+  background: #271d2e3d;
 }
 
 .navContainer {
@@ -334,7 +334,7 @@ body {
   transition: 250ms;
   text-align: center;
   margin-top: 2em;
-  background-color: #1a161d3d;
+  background-color: #271d2e3d;
   border-radius: 16px;
   border: 1px solid #2f2a33;
 }
@@ -441,6 +441,52 @@ body {
   text-align: left;
   user-select: none;
   margin-top: 1em;
+}
+
+.loginContainer {
+  min-height: 50%;
+  max-height: 50%;
+  min-width: 50%;
+  max-width: 50%;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #9c9c9c;
+  background-color: #eaeaea;
+  margin: auto;
+  margin-top: 10em;
+}
+.loginContainer .loginText {
+  margin: 1em;
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+  color: #92a8d8;
+}
+.loginContainer .userText {
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: bold;
+  color: #92a8d8;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+.loginContainer .input {
+  border-radius: 10px;
+  border: 1px solid #9c9c9c;
+}
+.loginContainer .submitBtn {
+  border-radius: 10px;
+  border: 1px solid #9c9c9c;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  font-size: 1em;
+  text-align: center;
+  font-weight: bold;
+  background-color: #92a8d8;
 }
 
 /*# sourceMappingURL=style.css.map */
