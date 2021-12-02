@@ -14,7 +14,7 @@
             <p onclick="toHome()"><i class="fas fa-home"></i> Home</p>
           </div>
           <div class="col-md-1 navBtn">
-            <p><i class="fas fa-file-signature"></i> Contact</p>
+            <p onclick="navigate('Contact')"><i class="fas fa-file-signature"></i> Contact</p>
           </div>
           <div class="col-md-1 navBtn">
             <p onclick="toLogin()" id="login"><i class="fas fa-address-card"></i> Inloggen</p>
