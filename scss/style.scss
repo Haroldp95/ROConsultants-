@@ -336,6 +336,33 @@ body {
   }
 }
 
+//?
+
+.navbar {
+  background-color: $backgroundLogin;
+  @include border(10px, 1px, $borderLight);
+  margin-top: -1em;
+
+  .navBarText {
+    transition: 250ms;
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+    color: $blueText;
+
+    &:hover {
+      transition: 250ms;
+      cursor: pointer;
+      color: $selected;
+    }
+  }
+
+  .logoMid {
+    margin-left: -15em;
+    font-size: 1.3em;
+  }
+}
+
 //? Login Box
 
 .loginContainer {
@@ -344,9 +371,9 @@ body {
   align-items: center;
   padding: 20px;
   @include border(20px, 1px, $borderLight);
-  background-color: #eaeaea;
+  background-color: $backgroundLogin;
   margin: auto;
-  margin-top: 10em;
+  margin-top: 15em;
 
   .loginText {
     margin: 1em;
@@ -379,5 +406,22 @@ body {
     text-align: center;
     font-weight: bold;
     background-color: $blueText;
+  }
+}
+
+//? Footer
+.footer {
+  @include border(10px, 1px, $borderDark);
+  padding: 2em;
+  margin-top: 17em;
+  font-size: 1em;
+  font-weight: bold;
+  color: $blueText;
+  background-color: $backgroundFooter;
+
+  .headF {
+    color: $borderLight;
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
   }
 }
