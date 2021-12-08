@@ -19,6 +19,7 @@ else
     $passwordRepeat = htmlspecialchars($_POST["passwordRepeat"]);
     $profilestatus = 1;
     $creationdate = date("Y-m-d H:i:s");
+    $lastjoindate = date("Y-m-d H:i:s");
 
     //Connection
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
@@ -81,20 +82,20 @@ else
     $stmt = mysqli_prepare($conn, "INSERT INTO 
     users(userFirstName, userLastName, userNickName, userGender, 
     userDateOfBirth, userEmail, userPassword, userProfileStatus, 
-    userAccountCreationDate) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    userAccountCreationDate, userLastLogin) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "sssssssis", $firstname, $lastname, $nickname, $gender, 
-    $dateOfBirth, $email, $hashedPassword, $profilestatus, $creationdate);
+    mysqli_stmt_bind_param($stmt, "sssssssiss", $firstname, $lastname, $nickname, $gender, 
+    $dateOfBirth, $email, $hashedPassword, $profilestatus, $creationdate, $lastjoindate);
     mysqli_stmt_execute($stmt);
 
     //Get data from db
     $stmt = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName, userNickName, 
-    userGender, userDateOfBirth, userEmail, userProfileStatus, userAccountCreationDate 
+    userGender, userDateOfBirth, userEmail, userProfileStatus, userAccountCreationDate, userLastLogin 
     FROM users WHERE userEmail = ?;");
     mysqli_stmt_bind_param($stmt, 's', $email);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $rId, $rFirstName, $rLastName, $rNickName, 
-    $rGender, $rDateOfBirth, $rEmail, $rProfileStatus, $rCreationDate);
+    $rGender, $rDateOfBirth, $rEmail, $rProfileStatus, $rCreationDate, $rLastJoinDate);
     mysqli_stmt_fetch($stmt);
 
     //Creating session values
@@ -107,6 +108,7 @@ else
     $_SESSION["userEmail"] = $rEmail;
     $_SESSION["userProfileStatus"] = $rProfileStatus;
     $_SESSION["userAccountCreationDate"] = $rCreationDate;
+    $_SESSION["userLastLogin"] = $rLastJoinDate;
 
     header("location: ../Webpages/home.php");
 }

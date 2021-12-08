@@ -11,6 +11,7 @@ else
     //Data form
     $emailLogin = htmlspecialchars($_POST["emailLogin"]);
     $passwordLogin = htmlspecialchars($_POST["passwordLogin"]);
+    $logindate = date("Y-m-d H:i:s");
 
     //Connection
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
@@ -55,14 +56,19 @@ else
             exit();
         }
 
+        //Update last login
+        $stmt = mysqli_prepare($conn, "UPDATE users SET userLastLogin = ? WHERE userEmail =? ;");
+        mysqli_stmt_bind_param($stmt, 'ss', $logindate, $emailLogin);
+        mysqli_stmt_execute($stmt);
+
         //Get data from db
         $stmt = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName, userNickName, 
-        userGender, userDateOfBirth, userEmail, userProfileStatus, userAccountCreationDate 
+        userGender, userDateOfBirth, userEmail, userProfileStatus, userAccountCreationDate, userLastLogin 
         FROM users WHERE userEmail = ?;");
-        mysqli_stmt_bind_param($stmt, 's', $email);
+        mysqli_stmt_bind_param($stmt, 's', $emailLogin);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $rId, $rFirstName, $rLastName, $rNickName, 
-        $rGender, $rDateOfBirth, $rEmail, $rProfileStatus, $rCreationDate);
+        $rGender, $rDateOfBirth, $rEmail, $rProfileStatus, $rCreationDate, $rLastLogin);
         mysqli_stmt_fetch($stmt);
 
         //Creating session values
@@ -75,6 +81,7 @@ else
         $_SESSION["userEmail"] = $rEmail;
         $_SESSION["userProfileStatus"] = $rProfileStatus;
         $_SESSION["userAccountCreationDate"] = $rCreationDate;
+        $_SESSION["userLastLogin"] = $rLastLogin;
 
         header("location: ../Webpages/home.php");
     }
