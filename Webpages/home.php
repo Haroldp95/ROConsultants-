@@ -84,8 +84,12 @@ else
     if (!isset($_POST["filterProjects"]))
     {
         $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-        $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-        $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+        function sql2() {
+            mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+        }
+        function sql3() {
+            $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+        }
     }
     else
     {
@@ -102,26 +106,42 @@ else
                 if ($filterDate == "1month")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                    }
                 }
                 else if ($filterDate == "3months")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                    }
                 }
                 else if ($filterDate == "calendarYear")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    $sql3 = $newdate = date("Y-01-01 00:00:00");
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-01-01 00:00:00");
+                    }
                 }
                 else if ($filterDate == "year")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                    }
                 }
                 else 
                 {
@@ -134,26 +154,42 @@ else
                 if ($filterDate == "1month")
                 {
                     $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    $sql2 = "";
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                    function sql2() {
+                        "";
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                    }
                 }
                 else if ($filterDate == "3months")
                 {
                     $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    $sql2 = "";
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                    function sql2() {
+                        "";
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                    }
                 }
                 else if ($filterDate == "calendarYear")
                 {
                     $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    $sql2 = "";
-                    $sql3 = $newdate = date("Y-01-01 00:00:00");
+                    function sql2() {
+                        "";
+                    }
+                    function sql3() {
+                        $newdate = date("Y-01-01 00:00:00");
+                    }
                 }
                 else if ($filterDate == "year")
                 {
                     $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    $sql2 = "";
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                    function sql2() {
+                        "";
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                    }
                 }
                 else 
                 {
@@ -166,26 +202,42 @@ else
                 if ($filterDate == "1month")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                    }
                 }
                 else if ($filterDate == "3months")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                    }
                 }
                 else if ($filterDate == "calendarYear")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
-                    $sql3 = $newdate = date("Y-01-01 00:00:00");
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-01-01 00:00:00");
+                    }
                 }
                 else if ($filterDate == "year")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    $sql2 = mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
-                    $sql3 = $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                    function sql2() {
+                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
+                    }
+                    function sql3() {
+                        $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                    }
                 }
                 else 
                 {
@@ -204,7 +256,7 @@ else
     //Gets data for home, after deciding content
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
     $stmt = mysqli_prepare($conn, $sql1);
-    $sql2;
+    sql2();
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $project);
     mysqli_stmt_store_result($stmt);
@@ -212,7 +264,7 @@ else
     while (mysqli_stmt_fetch($stmt)) 
     {
         $currentdate = date("Y-m-d H:i:s");
-        $sql3;
+        sql3();
 
         //Data from projects
         $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
