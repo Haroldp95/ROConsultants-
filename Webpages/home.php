@@ -294,6 +294,7 @@ else
             $projectCreationDate.'</td><td>'.
             $totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
             $projectId.'">Bewerk</a></td>';
+            echo $record;
         } 
     }
 }
