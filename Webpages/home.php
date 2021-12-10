@@ -85,9 +85,11 @@ else
     {
         $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
         function sql2() {
+            global $stmt;
             mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
         }
         function sql3() {
+            global $currentdate;
             $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
         }
     }
@@ -107,6 +109,7 @@ else
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
                     }
                     function sql3() {
