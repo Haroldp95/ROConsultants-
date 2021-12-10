@@ -89,8 +89,8 @@ else
             mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
         }
         function sql3() {
-            global $currentdate;
-            $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+            global $newdate, $currentdate;
+            $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
         }
     }
     else
@@ -113,26 +113,31 @@ else
                         mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
                     }
                 }
                 else if ($filterDate == "3months")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
                     }
                 }
                 else if ($filterDate == "calendarYear")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
                     }
                     function sql3() {
+                        global $newdate;
                         $newdate = date("Y-01-01 00:00:00");
                     }
                 }
@@ -140,10 +145,12 @@ else
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
                     }
                 }
                 else 
@@ -161,7 +168,8 @@ else
                         "";
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
                     }
                 }
                 else if ($filterDate == "3months")
@@ -171,7 +179,8 @@ else
                         "";
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
                     }
                 }
                 else if ($filterDate == "calendarYear")
@@ -181,6 +190,7 @@ else
                         "";
                     }
                     function sql3() {
+                        global $newdate;
                         $newdate = date("Y-01-01 00:00:00");
                     }
                 }
@@ -191,7 +201,8 @@ else
                         "";
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
                     }
                 }
                 else 
@@ -206,29 +217,35 @@ else
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-1 month', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
                     }
                 }
                 else if ($filterDate == "3months")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-3 months', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
                     }
                 }
                 else if ($filterDate == "calendarYear")
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
                     }
                     function sql3() {
+                        global $newdate;
                         $newdate = date("Y-01-01 00:00:00");
                     }
                 }
@@ -236,10 +253,12 @@ else
                 {
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
+                        global $stmt;
                         mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
                     }
                     function sql3() {
-                        $newdate = date("Y-m-d H:i:s", strtotime('-1 year', $currentdate));
+                        global $newdate, $currentdate;
+                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
                     }
                 }
                 else 
@@ -266,35 +285,53 @@ else
 
     while (mysqli_stmt_fetch($stmt)) 
     {
+
         $currentdate = date("Y-m-d H:i:s");
         sql3();
 
         //Data from projects
         $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
         $s = mysqli_prepare($conn, "SELECT * FROM projects WHERE projectId = ? AND 
-        DATE BETWEEN ? AND ? ORDER BY projectCreationDate DESC ;");
-        mysqli_stmt_bind_param($s, 'iss', $project, $newdate, $currentdate);
+        projectCreationDate BETWEEN ? AND ? ORDER BY projectCreationDate DESC ;");
+        mysqli_stmt_bind_param($s, 'iss', $project, $currentdate, $newdate);
         mysqli_stmt_execute($s);
         mysqli_stmt_bind_result($s, $projectId, $projectName, $projectCreationDate, $projectUserId);
         mysqli_stmt_store_result($s);
+        global $projectId, $projectName, $projectCreationDate, $projectUserId;
+
 
         while (mysqli_stmt_fetch($s)) 
         {
+            global $projectId, $projectName, $projectCreationDate, $projectUserId;
             //Total cost project
             $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
             $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCostId = ? ;");
-            mysqli_stmt_bind_param($t, 'i', $project);
+            mysqli_stmt_bind_param($t, 'i', $projectId);
             mysqli_stmt_execute($t);
             mysqli_stmt_bind_result($t, $totalcost);
             mysqli_stmt_store_result($t);
 
+            while (mysqli_stmt_fetch($t))
+            {
+                //Er wordt geen echo uitgevoerd. ???
+                global $projectId, $projectName, $projectCreationDate, $projectUserId;
+                $record = '<td>'.$projectId.'</td><td>'.
+                $projectName.'</td><td>'.
+                $projectCreationDate.'</td><td>'.
+                $totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
+                $projectId.'">Bewerk</a></td>';
+                echo $record;
+            }
+
             //Table with project data
-            $record = '<td>'.$projectId.'</td><td>'.
-            $projectName.'</td><td>'.
-            $projectCreationDate.'</td><td>'.
-            $totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
-            $projectId.'">Bewerk</a></td>';
-            echo $record;
+            //$record = '<td>'.$projectId.'</td><td>'.
+            //$projectName.'</td><td>'.
+            //$projectCreationDate.'</td><td>'.
+            //$totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
+            //$projectId.'">Bewerk</a></td>';
+            //echo $record;
+
+            echo "test";
         } 
     }
 }
