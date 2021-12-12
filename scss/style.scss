@@ -14,14 +14,14 @@ html {
 }
 
 body {
-  height: 100%;
+  // height: 100%;
   margin: 0px;
   padding-top: 1em;
   width: 100%;
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
   // background-image: url("../plaatjes/background.jpg");
   // background-color: $background;
   background: radial-gradient(circle, $background 0%, $background2 100%);
@@ -378,6 +378,14 @@ body {
   .loginText {
     margin: 1em;
     font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+    color: $blueText;
+  }
+
+  .registerText {
+    margin: 0.2em;
+    font-size: 6em;
     text-align: center;
     font-weight: bold;
     color: $blueText;

@@ -51,13 +51,9 @@ html {
 }
 
 body {
-  height: 100%;
   margin: 0px;
   padding-top: 1em;
   width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   background: radial-gradient(circle, #272d47 0%, #121222 100%);
 }
 
@@ -483,6 +479,13 @@ body {
 .loginContainer .loginText {
   margin: 1em;
   font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+  color: #92a8d8;
+}
+.loginContainer .registerText {
+  margin: 0.2em;
+  font-size: 6em;
   text-align: center;
   font-weight: bold;
   color: #92a8d8;
