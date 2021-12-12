@@ -514,6 +514,16 @@ body {
   font-weight: bold;
   background-color: #92a8d8;
 }
+.loginContainer .drowpdown {
+  border-radius: 10px;
+  border: 1px solid #9c9c9c;
+  padding: 0.15em;
+  width: 100%;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: bold;
+  color: #92a8d8;
+}
 
 .footer {
   border-radius: 10px;

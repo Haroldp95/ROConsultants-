@@ -415,6 +415,16 @@ body {
     font-weight: bold;
     background-color: $blueText;
   }
+
+  .drowpdown {
+    @include border(10px, 1px, $borderLight);
+    padding: 0.15em;
+    width: 100%;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+    color: $blueText;
+  }
 }
 
 //? Footer
