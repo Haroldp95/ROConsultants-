@@ -373,7 +373,7 @@ body {
   @include border(20px, 1px, $borderLight);
   background-color: $backgroundLogin;
   margin: auto;
-  margin-top: 15em;
+  margin-top: 5em;
 
   .loginText {
     margin: 1em;
@@ -431,7 +431,7 @@ body {
 .footer {
   @include border(10px, 1px, $borderDark);
   padding: 2em;
-  margin-top: 17em;
+  margin-top: 7em;
   font-size: 1em;
   font-weight: bold;
   color: $blueText;
