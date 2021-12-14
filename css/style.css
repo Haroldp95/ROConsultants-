@@ -474,7 +474,7 @@ body {
   border: 1px solid #9c9c9c;
   background-color: #eaeaea;
   margin: auto;
-  margin-top: 15em;
+  margin-top: 5em;
 }
 .loginContainer .loginText {
   margin: 1em;
@@ -482,6 +482,9 @@ body {
   text-align: center;
   font-weight: bold;
   color: #92a8d8;
+}
+.loginContainer .loginTextError {
+  color: #ff4040;
 }
 .loginContainer .registerText {
   margin: 0.2em;
@@ -524,12 +527,28 @@ body {
   font-weight: bold;
   color: #92a8d8;
 }
+.loginContainer .hippo {
+  font-size: 5em;
+  text-align: center;
+  font-weight: bold;
+  color: #92a8d8;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+.loginContainer .backText {
+  font-size: 1em;
+  text-align: center;
+  font-weight: bold;
+  color: #92a8d8;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
 
 .footer {
   border-radius: 10px;
   border: 1px solid #3a3a3a;
   padding: 2em;
-  margin-top: 17em;
+  margin-top: 7em;
   font-size: 1em;
   font-weight: bold;
   color: #92a8d8;
