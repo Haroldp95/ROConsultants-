@@ -381,6 +381,10 @@ body {
     text-align: center;
     font-weight: bold;
     color: $blueText;
+
+    &Error{
+      color: $error;
+    }
   }
 
   .registerText {
@@ -424,6 +428,24 @@ body {
     text-align: center;
     font-weight: bold;
     color: $blueText;
+  }
+
+  .hippo {
+    font-size: 5em;
+    text-align: center;
+    font-weight: bold;
+    color: $blueText;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+  }
+
+  .backText{
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+    color: $blueText;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
   }
 }
 
