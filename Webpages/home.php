@@ -92,6 +92,94 @@ else
             global $newdate, $currentdate;
             $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
         }
+        /*
+        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+    $stmt = mysqli_prepare($conn, $sql1);
+    sql2();
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $project);
+    mysqli_stmt_store_result($stmt);
+
+    while (mysqli_stmt_fetch($stmt)) 
+    {
+
+        $currentdate = date("Y-m-d H:i:s");
+        global $newdate, $currentdate;
+        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
+
+        //Data from projects
+        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+        $s = mysqli_prepare($conn, "SELECT * FROM projects WHERE projectId = ? AND 
+        projectCreationDate BETWEEN ? AND ? ORDER BY projectCreationDate DESC ;");
+        mysqli_stmt_bind_param($s, 'iss', $project, $currentdate, $newdate);
+        mysqli_stmt_execute($s);
+        mysqli_stmt_bind_result($s, $projectId, $projectName, $projectCreationDate, $projectUserId);
+        mysqli_stmt_store_result($s);
+        global $projectId, $projectName, $projectCreationDate, $projectUserId;
+
+        echo $projectId." ".$projectName;
+
+
+        while (mysqli_stmt_fetch($s)) 
+        {
+            global $projectId, $projectName, $projectCreationDate, $projectUserId;
+            echo $projectId." ".$projectName;
+            //Total cost project
+            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+            $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCostId = ? ;");
+            mysqli_stmt_bind_param($t, 'i', $projectId);
+            mysqli_stmt_execute($t);
+            mysqli_stmt_bind_result($t, $totalcost);
+            mysqli_stmt_store_result($t);
+
+            
+
+            while (mysqli_stmt_fetch($t))
+            {
+                
+                echo $totalcost;
+                global $projectId, $projectName, $projectCreationDate, $projectUserId;
+                $record = '<td>'.$projectId.'</td><td>'.
+                $projectName.'</td><td>'.
+                $projectCreationDate.'</td><td>'.
+                $totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
+                $projectId.'">Bewerk</a></td>';
+                echo $record;
+            }
+
+            //Table with project data
+            //$record = '<td>'.$projectId.'</td><td>'.
+            //$projectName.'</td><td>'.
+            //$projectCreationDate.'</td><td>'.
+            //$totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
+            //$projectId.'">Bewerk</a></td>';
+            //echo $record;
+        } 
+    } */
+
+    $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+    $stmt = mysqli_prepare($conn, "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;");
+    mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $project);
+    mysqli_stmt_store_result($stmt);
+    while (mysqli_stmt_fetch($stmt)) 
+    {
+        $currentdate = date("Y-m-d H:i:s");
+        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
+        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+        $s = mysqli_prepare($conn, "SELECT * FROM projects WHERE projectId = ? AND 
+        projectCreationDate BETWEEN ? AND ? ORDER BY projectCreationDate DESC ;");
+        mysqli_stmt_bind_param($s, 'iss', $project, $currentdate, $newdate);
+        mysqli_stmt_execute($s);
+        mysqli_stmt_bind_result($s, $projectId, $projectName, $projectCreationDate, $projectUserId);
+        mysqli_stmt_store_result($s);
+
+        echo "<td>".$projectId."</td><td>".$projectName."</td><td>".$projectCreationDate."</td>";
+    }
+
+
+
     }
     else
     {
@@ -299,10 +387,13 @@ else
         mysqli_stmt_store_result($s);
         global $projectId, $projectName, $projectCreationDate, $projectUserId;
 
+        echo $projectId." ".$projectName;
+
 
         while (mysqli_stmt_fetch($s)) 
         {
             global $projectId, $projectName, $projectCreationDate, $projectUserId;
+            echo $projectId." ".$projectName;
             //Total cost project
             $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
             $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCostId = ? ;");
@@ -311,9 +402,12 @@ else
             mysqli_stmt_bind_result($t, $totalcost);
             mysqli_stmt_store_result($t);
 
+            
+
             while (mysqli_stmt_fetch($t))
             {
-                //Er wordt geen echo uitgevoerd. ???
+                
+                echo $totalcost;
                 global $projectId, $projectName, $projectCreationDate, $projectUserId;
                 $record = '<td>'.$projectId.'</td><td>'.
                 $projectName.'</td><td>'.
@@ -330,8 +424,6 @@ else
             //$totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
             //$projectId.'">Bewerk</a></td>';
             //echo $record;
-
-            echo "test";
         } 
     }
 }
