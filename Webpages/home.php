@@ -95,11 +95,42 @@ else
     }
     else
     {
-        if (empty(htmlspecialchars($_POST["filterProjectsUsers"])) || 
-        empty(htmlspecialchars($_POST["filterProjectsDate"])) )
+        //hiet zit nog een fout.
+        //de code moet altijd een $fitlteruser en $filterdate hebben.
+        if ($_SESSION["userProfileStatus"] == 1)
         {
-            header("location: ../Webpages/home.php");
-            exit();
+            $filterUsers = "ownProjects";
+        }/*
+        else if ($_SESSION["userProfileStatus"] == 2)
+        {
+            $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
+        }
+        else if ($_SESSION["userProfileStatus"] == 3)
+        {
+            $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
+        }*/
+
+        $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
+        $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
+
+        if ($_SESSION["userProfileStatus"] == 1)
+        {
+            $filterUsers = "ownProjects";
+        }
+
+        if (($_SESSION["userProfileStatus"] == 1) && (empty($filterDate)))
+        {
+            $filterDate = "3months";
+        }
+        else if (($_SESSION["userProfileStatus"] == 2) && (empty($filterDate)) && (empty($filterUsers)))
+        {
+            $filterUsers = "ownProjects";
+            $filterDate = "3months";
+        }
+        else if (($_SESSION["userProfileStatus"] == 3) && (empty($filterDate)) && (empty($filterUsers)))
+        {
+            $filterUsers = "ownProjects";
+            $filterDate = "3months";
         }
         else 
         {
@@ -275,7 +306,7 @@ else
         }
     }
 
-    //Gets data for home, after deciding content
+    //Gets project id's
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
     $stmt = mysqli_prepare($conn, $sql1);
     sql2();
@@ -283,56 +314,32 @@ else
     mysqli_stmt_bind_result($stmt, $project);
     mysqli_stmt_store_result($stmt);
 
+    //Gets data by project
     while (mysqli_stmt_fetch($stmt)) 
     {
-
+        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
         $currentdate = date("Y-m-d H:i:s");
         sql3();
-
-        //Data from projects
-        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-        $s = mysqli_prepare($conn, "SELECT * FROM projects WHERE projectId = ? AND 
-        projectCreationDate BETWEEN ? AND ? ORDER BY projectCreationDate DESC ;");
-        mysqli_stmt_bind_param($s, 'iss', $project, $currentdate, $newdate);
+        $s = mysqli_prepare($conn, "SELECT projectId, projectName, projectCreationDate, projectUserId FROM projects WHERE projectId = ? ORDER BY projectCreationDate DESC ;");
+        mysqli_stmt_bind_param($s, 'i', $project);
         mysqli_stmt_execute($s);
         mysqli_stmt_bind_result($s, $projectId, $projectName, $projectCreationDate, $projectUserId);
         mysqli_stmt_store_result($s);
-        global $projectId, $projectName, $projectCreationDate, $projectUserId;
+        mysqli_stmt_fetch($s);
 
+        $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCodeId = ? ;");
+        mysqli_stmt_bind_param($t, 'i', $project);
+        mysqli_stmt_execute($t);
+        mysqli_stmt_bind_result($t, $totalcost);
+        mysqli_stmt_store_result($t);
+        mysqli_stmt_fetch($t);
 
-        while (mysqli_stmt_fetch($s)) 
-        {
-            global $projectId, $projectName, $projectCreationDate, $projectUserId;
-            //Total cost project
-            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-            $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCostId = ? ;");
-            mysqli_stmt_bind_param($t, 'i', $projectId);
-            mysqli_stmt_execute($t);
-            mysqli_stmt_bind_result($t, $totalcost);
-            mysqli_stmt_store_result($t);
-
-            while (mysqli_stmt_fetch($t))
-            {
-                //Er wordt geen echo uitgevoerd. ???
-                global $projectId, $projectName, $projectCreationDate, $projectUserId;
-                $record = '<td>'.$projectId.'</td><td>'.
-                $projectName.'</td><td>'.
-                $projectCreationDate.'</td><td>'.
-                $totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
-                $projectId.'">Bewerk</a></td>';
-                echo $record;
-            }
-
-            //Table with project data
-            //$record = '<td>'.$projectId.'</td><td>'.
-            //$projectName.'</td><td>'.
-            //$projectCreationDate.'</td><td>'.
-            //$totalcost.'</td><td><a href="../Webpages/editproject.php?id="'.
-            //$projectId.'">Bewerk</a></td>';
-            //echo $record;
-
-            echo "test";
-        } 
+        echo '<table style="color:white;border:1px solid white;padding:6px;">
+        <td style="color:white;border:1px solid white;padding:6px;">'.$projectId.'</td>'.
+        '<td style="color:white;border:1px solid white;padding:6px;">'.$projectName.'</td>'.
+        '<td style="color:white;border:1px solid white;padding:6px;">'.$projectCreationDate.'</td>'.
+        '<td style="color:white;border:1px solid white;padding:6px;">'.$totalcost.'</td></table>';
+        echo '<p style="color:white">'.$newdate.'</p>';
     }
 }
 ?>
