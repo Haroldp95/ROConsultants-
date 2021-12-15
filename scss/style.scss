@@ -402,6 +402,10 @@ body {
     color: $blueText;
     margin-top: 0.8em;
     margin-bottom: 0.8em;
+
+    &Color{
+      color: $subText;
+    }
   }
 
   .input {
