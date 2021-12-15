@@ -48,6 +48,12 @@ else
     <label for="filterProjectsUsersOwn">Alle projecten</label>
     <input type="radio" name="filterProjectsUsers" value="empProjects" id="filterProjectsUsersEmp">
     <label for="filterProjectsUsersOwn">Selecteer projecten medewerker</label>
+    '.
+    '
+    <select name="filterUsers">
+        <option value="1">Arend</option>
+        <option value="2">Jan</option>
+    </select>
     <p>Projecten uit:</p>
     <input type="radio" name="filterProjectsDate" value="1month" id="filterProjects1Month">
     <label for="filterProjects1Month">Laatste maand</label>
@@ -83,6 +89,7 @@ else
     //Deciding content home overview.
     if (!isset($_POST["filterProjects"]))
     {
+        //If user hasn't filled in filter
         $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
         function sql2() {
             global $stmt;
@@ -95,29 +102,48 @@ else
     }
     else
     {
-        //hiet zit nog een fout.
-        //de code moet altijd een $fitlteruser en $filterdate hebben.
+        //If user filled in filter
+        //Sets values for $filterUsers and $filterDate
+        //nog steeds errors, code moet altijd waarde voor $filterUsers en $filterDate hebben.
         if ($_SESSION["userProfileStatus"] == 1)
         {
             $filterUsers = "ownProjects";
-        }/*
+            if (empty(htmlspecialchars($_POST["filterProjectsDate"])))
+            {
+                $filterDate = "3months";
+            }
+            else
+            {
+                $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
+            }
+        }
         else if ($_SESSION["userProfileStatus"] == 2)
         {
             $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
+            if (empty(htmlspecialchars($_POST["filterProjectsDate"])))
+            {
+                $filterDate = "3months";
+            }
+            else
+            {
+                $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
+            }
         }
         else if ($_SESSION["userProfileStatus"] == 3)
         {
             $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
-        }*/
-
-        $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
-        $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
-
-        if ($_SESSION["userProfileStatus"] == 1)
-        {
-            $filterUsers = "ownProjects";
+            if (empty(htmlspecialchars($_POST["filterProjectsDate"])))
+            {
+                $filterDate = "3months";
+            }
+            else 
+            {
+                $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
+            }
         }
 
+
+        //Checking for empty values
         if (($_SESSION["userProfileStatus"] == 1) && (empty($filterDate)))
         {
             $filterDate = "3months";
@@ -134,6 +160,7 @@ else
         }
         else 
         {
+            //SQL queries decided on filter
             if ($filterUsers == "ownProjects")
             {
                 if ($filterDate == "1month")
@@ -249,7 +276,7 @@ else
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
                         global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
+                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterUsers"]);
                     }
                     function sql3() {
                         global $newdate, $currentdate;
@@ -261,7 +288,7 @@ else
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
                         global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
+                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterUsers"]);
                     }
                     function sql3() {
                         global $newdate, $currentdate;
@@ -273,7 +300,7 @@ else
                     $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
                     function sql2() {
                         global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
+                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterUsers"]);
                     }
                     function sql3() {
                         global $newdate;
@@ -340,6 +367,9 @@ else
         '<td style="color:white;border:1px solid white;padding:6px;">'.$projectCreationDate.'</td>'.
         '<td style="color:white;border:1px solid white;padding:6px;">'.$totalcost.'</td></table>';
         echo '<p style="color:white">'.$newdate.'</p>';
+        echo '<p style="color:white">'.$_POST["filterProjectsUsers"].'</p>';
+        echo '<p style="color:white">'.$_POST["filterProjectsDate"].'</p>';
+        echo '<p style="color:white">'.$_POST["filterUsers"].'</p>';
     }
 }
 ?>
