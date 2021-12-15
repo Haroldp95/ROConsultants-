@@ -1,44 +1,61 @@
 //* Javascript by Harold.
 console.log("Loaded")
-//? Click event listener
-//object.addEventListener("click", toHome); deze lijn lijkt niet nodig te zijn voor de onclick eventlistener
+//click event listener
+//object.addEventListener("click", toHome); //deze lijn lijkt niet nodig te zijn voor de onclick eventlistener
 
-//? Open home page.
+//debug lines
+pageURL = location.href; 
+console.log(pageURL);
+
+//open home page.
 function toHome() {
-    console.log("Going Home...")
-    location.replace("./index.html")
-}
-
-//? Open Login Screen.
-function toLogin() {
-
-    //Clear innertext
-    document.getElementById("login").innerText = "";
-
-    //Add Icon and new text.
-    var tag = document.createElement("i");
-    tag.className = "fas fa-user-alt";
-    tag.innerText = " Uitloggen"
-    var element = document.getElementById("login");
-    element.appendChild(tag);
-    
-    //Change Class.
-    document.getElementById("login").className = "login";
-}
-
-function navigate($link) {
-    switch($link) {
-        case "Contact":
-            location.replace("./Webpages/contact.php");
-            break;
-        case "About":
-            location.replace("./Webpages/aboutus.php");
-            break;
-        case "License":
-            location.replace("./Webpages/license.php");
-            break;
-        case "Privacy":
-            location.replace("./Webpages/privacy.php");
-            break;
+    if (location.href.includes("Webpages")){
+        console.log("Going Home...")
+        location.assign('/Scripts/ROConsultants-/index.php')
     }
+    else
+    {
+        location.assign('./index.php')
+    }
+
+}
+
+//navigates to links from buttons in header/footers
+function navigate($link) {
+    
+    if (location.href.includes("Webpages"))
+    {
+        switch($link) {
+            case "Contact":
+                location.assign("./contact.php");
+                break;
+            case "About":
+                location.assign("./aboutus.php");
+                break;
+            case "License":
+                location.assign("./license.php");
+                break;
+            case "Privacy":
+                location.assign("./privacy.php");
+                break;
+        }
+    }    
+    else if (!location.href.includes("Webpages"))
+    {
+        switch($link) {
+            case "Contact":
+                location.assign("./Webpages/contact.php");
+                break;
+            case "About":
+                location.assign("./Webpages/aboutus.php");
+                break;
+            case "License":
+                location.assign("./Webpages/license.php");
+                break;
+            case "Privacy":
+                location.assign("./Webpages/privacy.php");
+                break;
+        }
+    }
+
 }
