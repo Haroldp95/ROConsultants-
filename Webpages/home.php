@@ -48,12 +48,22 @@ else
     <label for="filterProjectsUsersOwn">Alle projecten</label>
     <input type="radio" name="filterProjectsUsers" value="empProjects" id="filterProjectsUsersEmp">
     <label for="filterProjectsUsersOwn">Selecteer projecten medewerker</label>
-    '.
-    '
-    <select name="filterUsers">
-        <option value="1">Arend</option>
-        <option value="2">Jan</option>
-    </select>
+    <select name="filterUsers">';
+    
+    //Code for select user
+    $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+    $m = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
+    mysqli_stmt_execute($m);
+    mysqli_stmt_bind_result($m, $rId, $rFirstName, $rLastName);
+    mysqli_stmt_store_result($m);
+
+    while (mysqli_stmt_fetch($m)) 
+    {
+        $homeNavFilter2 .= '<option value="'.$rId.'">'.
+        $rFirstName.' '.$rLastName.'</option>';
+    }
+    
+    $homeNavFilter2 .= '</select>
     <p>Projecten uit:</p>
     <input type="radio" name="filterProjectsDate" value="1month" id="filterProjects1Month">
     <label for="filterProjects1Month">Laatste maand</label>
@@ -363,13 +373,26 @@ else
 
         echo '<table style="color:white;border:1px solid white;padding:6px;">
         <td style="color:white;border:1px solid white;padding:6px;">'.$projectId.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$projectName.'</td>'.
+        '<td style="color:white;border:1px solid white;padding:6px;">
+        <form action="../Webpages/project.php" method="post">
+        <input type="hidden" name="viewId" value="'.$projectId.'">
+        <input type="submit" name="viewProject" value="'.$projectName.'"></form></td>'.
         '<td style="color:white;border:1px solid white;padding:6px;">'.$projectCreationDate.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$totalcost.'</td></table>';
+        '<td style="color:white;border:1px solid white;padding:6px;">'.$totalcost.'</td>'.
+        '<td style="color:white;border:1px solid white;padding:6px;">
+        <form action="../Webpages/project.php" method="post">
+        <input type="hidden" name="editId" value="'.$projectId.'">
+        <input type="submit" name="editProject" value="'.$projectName.'"></form></td></table>';
         echo '<p style="color:white">'.$newdate.'</p>';
         echo '<p style="color:white">'.$_POST["filterProjectsUsers"].'</p>';
         echo '<p style="color:white">'.$_POST["filterProjectsDate"].'</p>';
         echo '<p style="color:white">'.$_POST["filterUsers"].'</p>';
+
+        /*
+        <form action="../Processpages/createprojecttoeditproject.php" method="post">
+        <input type="text" name="projectname" id="" placeholder="Project naam">
+        <input type="submit" name="createproject" value="Maak project">
+        </form> */
     }
 }
 ?>
