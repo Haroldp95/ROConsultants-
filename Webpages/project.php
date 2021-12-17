@@ -11,31 +11,72 @@ if (!isset($_SESSION["userId"]))
 }
 else 
 {
-    if (!isset($_POST["viewId"]))
+    if (isset($_SESSION["viewProjectId"]))
+    {
+        $viewProjectId = $_SESSION["viewProjectId"];
+    }
+    else if (isset($_POST["viewId"]))
+    {
+        $viewProjectId = $_POST["viewId"];
+    }
+    else 
     {
         header("location: ../Webpages/error.php");
         exit();
     }
-    else
+    
+    //Check connection
+    $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+    if (!$conn) 
     {
-        //Check connection
-        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-        if (!$conn) 
+        header("location: ../Webpages/error.php");
+        exit();
+    }
+
+    //Navigation
+    $editprojectNavLinks1 = '<div>
+    <a href="../Webpages/home.php">Home</a>
+    <form action="../Webpages/editproject.php" method="post">
+    <input type="hidden" name="editId" value="'.$viewProjectId.'">
+    <input type="submit" name="editProject" value="Bewerk"></form>
+    </div>';
+
+    //Echo navigation
+    echo $editprojectNavLinks1;
+
+    //select projects.projectid, users.userFirstName etc
+    $stmt = mysqli_prepare($conn, "SELECT * FROM projectcosts 
+    INNER JOIN projects ON projectcosts.projectcostCodeId = projects.projectId
+    INNER JOIN users ON projectcosts.projectcostUserId = users.userId
+    INNER JOIN costs ON projectcosts.projectcostCostId = costs.costId
+    WHERE projectcostCodeId = ? ;");
+    mysqli_stmt_bind_param($stmt, 'i', $viewProjectId);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, /* $projectid, $firstname, etc */);
+    mysqli_stmt_store_result($stmt);
+    $i = 0;
+    while (mysqli_stmt_fetch($stmt))
+    {
+        if ($i == 0)
         {
-            header("location: ../Webpages/error.php");
-            exit();
+            //eerste rij bevat alle informatie
+            //projectnummer(id), projectnaam, kostencode, kostenomschrijving, datum gemaakte kosten,
+            //persoon wie kosten heeft toegevoegd, bedrag kosten
         }
+        else
+        {
+            //volgende rijen bevatten:
+            //(leeg), (leeg), kostencode, kostenomschrijving, datum gemaakte kosten,
+            //persoon wie kosten heeft toegevoegd, bedrag kosten
+        }
+        $i++;
+    }
 
-        //Navigation
-        $editprojectNavLinks1 = '<div>
-        <a href="../Webpages/home.php">Home</a>
-        <a href="../Processpages/editproject.php">Project aanpassen</a>
-        </div>';
+    //daarna sql querie met sum van alle kosten voor totaal. tabelstructuur:
+    //(leeg), (leeg), (leeg), (leeg), (leeg), totaal:, sum(kosten).
+    
 
-        //Echo navigation
-        echo $editprojectNavLinks1;
-
-        echo $_POST["viewId"];
+    echo $_POST["viewId"];
 
 
         //print alle informatie in input elementen
@@ -49,7 +90,7 @@ else
         //En eventueel knop voor niet opslaan,
         //Vergeet niet dat kosten en projectmembers hier ook moeten kunnen worden verwijderd.
 
-    }
+    
     /*
     //Gets project id's
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');

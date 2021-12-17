@@ -48,9 +48,9 @@ else
     <label for="filterProjectsUsersOwn">Alle projecten</label>
     <input type="radio" name="filterProjectsUsers" value="empProjects" id="filterProjectsUsersEmp">
     <label for="filterProjectsUsersOwn">Selecteer projecten medewerker</label>
-    <select name="filterUsers">';
+    <select name="filterProjectsUsersSelect">';
     
-    //Code for select user
+    //Code for <select user>
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
     $m = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
     mysqli_stmt_execute($m);
@@ -96,251 +96,200 @@ else
         exit();
     }
 
-    //Deciding content home overview.
+    //Standard input when form isn't filled in
     if (!isset($_POST["filterProjects"]))
     {
-        //If user hasn't filled in filter
-        $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-        function sql2() {
-            global $stmt;
-            mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-        }
-        function sql3() {
-            global $newdate, $currentdate;
-            $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
-        }
+        $filterUsers = "ownProjects";
+        $filterDate = "3month";
+    }
+
+    if (!isset($_POST["filterProjectsUsers"]))
+    {
+        $filterUsers = "ownProjects";
     }
     else
     {
-        //If user filled in filter
-        //Sets values for $filterUsers and $filterDate
-        //nog steeds errors, code moet altijd waarde voor $filterUsers en $filterDate hebben.
-        if ($_SESSION["userProfileStatus"] == 1)
-        {
-            $filterUsers = "ownProjects";
-            if (empty(htmlspecialchars($_POST["filterProjectsDate"])))
-            {
-                $filterDate = "3months";
-            }
-            else
-            {
-                $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
-            }
-        }
-        else if ($_SESSION["userProfileStatus"] == 2)
-        {
-            $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
-            if (empty(htmlspecialchars($_POST["filterProjectsDate"])))
-            {
-                $filterDate = "3months";
-            }
-            else
-            {
-                $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
-            }
-        }
-        else if ($_SESSION["userProfileStatus"] == 3)
-        {
-            $filterUsers = htmlspecialchars($_POST["filterProjectsUsers"]);
-            if (empty(htmlspecialchars($_POST["filterProjectsDate"])))
-            {
-                $filterDate = "3months";
-            }
-            else 
-            {
-                $filterDate = htmlspecialchars($_POST["filterProjectsDate"]);
-            }
-        }
+        $filterUsers = $_POST["filterProjectsUsers"];
+    }
 
+    if (!isset($_POST["filterProjectsDate"]))
+    {
+        $filterDate = "3months";
+    }
+    else 
+    {
+        $filterDate = $_POST["filterProjectsDate"];
+    }
 
-        //Checking for empty values
-        if (($_SESSION["userProfileStatus"] == 1) && (empty($filterDate)))
+    //Deciding content home page
+    if ($filterUsers == "ownProjects")
+    {
+        if ($filterDate == "1month")
         {
-            $filterDate = "3months";
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
+            }
         }
-        else if (($_SESSION["userProfileStatus"] == 2) && (empty($filterDate)) && (empty($filterUsers)))
+        else if ($filterDate == "3months")
         {
-            $filterUsers = "ownProjects";
-            $filterDate = "3months";
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
+            }
         }
-        else if (($_SESSION["userProfileStatus"] == 3) && (empty($filterDate)) && (empty($filterUsers)))
+        else if ($filterDate == "calendarYear")
         {
-            $filterUsers = "ownProjects";
-            $filterDate = "3months";
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+            }
+            function sql3() {
+                global $newdate;
+                $newdate = date("Y-01-01 00:00:00");
+            }
+        }
+        else if ($filterDate == "year")
+        {
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
+            }
         }
         else 
         {
-            //SQL queries decided on filter
-            if ($filterUsers == "ownProjects")
-            {
-                if ($filterDate == "1month")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
-                    }
-                }
-                else if ($filterDate == "3months")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
-                    }
-                }
-                else if ($filterDate == "calendarYear")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    }
-                    function sql3() {
-                        global $newdate;
-                        $newdate = date("Y-01-01 00:00:00");
-                    }
-                }
-                else if ($filterDate == "year")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_SESSION["userId"]);
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
-                    }
-                }
-                else 
-                {
-                    header("location: ../Webpages/error.php");
-                    exit();
-                }
+            header("location: ../Webpages/error.php");
+            exit();
+        }
+    }
+    else if ($filterUsers == "allProjects")
+    {
+        if ($filterDate == "1month")
+        {
+            $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
+            function sql2() {
+                "";
             }
-            else if ($filterUsers == "allProjects")
-            {
-                if ($filterDate == "1month")
-                {
-                    $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    function sql2() {
-                        "";
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
-                    }
-                }
-                else if ($filterDate == "3months")
-                {
-                    $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    function sql2() {
-                        "";
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
-                    }
-                }
-                else if ($filterDate == "calendarYear")
-                {
-                    $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    function sql2() {
-                        "";
-                    }
-                    function sql3() {
-                        global $newdate;
-                        $newdate = date("Y-01-01 00:00:00");
-                    }
-                }
-                else if ($filterDate == "year")
-                {
-                    $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
-                    function sql2() {
-                        "";
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
-                    }
-                }
-                else 
-                {
-                    header("location: ../Webpages/error.php");
-                    exit();
-                }
-            }
-            else if ($filterUsers == "empProjects")
-            {
-                if ($filterDate == "1month")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterUsers"]);
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
-                    }
-                }
-                else if ($filterDate == "3months")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterUsers"]);
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
-                    }
-                }
-                else if ($filterDate == "calendarYear")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterUsers"]);
-                    }
-                    function sql3() {
-                        global $newdate;
-                        $newdate = date("Y-01-01 00:00:00");
-                    }
-                }
-                else if ($filterDate == "year")
-                {
-                    $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
-                    function sql2() {
-                        global $stmt;
-                        mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsers"]);
-                    }
-                    function sql3() {
-                        global $newdate, $currentdate;
-                        $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
-                    }
-                }
-                else 
-                {
-                    header("location: ../Webpages/error.php");
-                    exit();
-                }
-            }
-            else 
-            {
-                header("location: ../Webpages/error.php");
-                exit();
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
             }
         }
+        else if ($filterDate == "3months")
+        {
+            $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
+            function sql2() {
+                "";
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
+            }
+        }
+        else if ($filterDate == "calendarYear")
+        {
+            $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
+            function sql2() {
+                "";
+            }
+            function sql3() {
+                global $newdate;
+                $newdate = date("Y-01-01 00:00:00");
+            }
+        }
+        else if ($filterDate == "year")
+        {
+            $sql1 = "SELECT DISTINCT memberProjectId FROM projectmembers ;";
+            function sql2() {
+                "";
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
+            }
+        }
+        else 
+        {
+            header("location: ../Webpages/error.php");
+            exit();
+        }
+    }
+    else if ($filterUsers == "empProjects")
+    {
+        if ($filterDate == "1month")
+        {
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsersSelect"]);
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")));
+            }
+        }
+        else if ($filterDate == "3months")
+        {
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsersSelect"]);
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m")-3, date("d"),   date("Y")));
+            }
+        }
+        else if ($filterDate == "calendarYear")
+        {
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsersSelect"]);
+            }
+            function sql3() {
+                global $newdate;
+                $newdate = date("Y-01-01 00:00:00");
+            }
+        }
+        else if ($filterDate == "year")
+        {
+            $sql1 = "SELECT memberProjectId FROM projectmembers WHERE memberUserId = ? ;";
+            function sql2() {
+                global $stmt;
+                mysqli_stmt_bind_param($stmt, 'i', $_POST["filterProjectsUsersSelect"]);
+            }
+            function sql3() {
+                global $newdate, $currentdate;
+                $newdate = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d"),   date("Y")-1));
+            }
+        }
+        else 
+        {
+            header("location: ../Webpages/error.php");
+            exit();
+        }
+    }
+    else 
+    {
+        header("location: ../Webpages/error.php");
+        exit();
     }
 
     //Gets project id's
@@ -371,6 +320,13 @@ else
         mysqli_stmt_store_result($t);
         mysqli_stmt_fetch($t);
 
+        $st = mysqli_prepare($conn, "SELECT userFirstName, userLastName, userNickName FROM users WHERE userId = ? ;");
+        mysqli_stmt_bind_param($st, 'i', $projectUserId);
+        mysqli_stmt_execute($st);
+        mysqli_stmt_bind_result($st, $userFirstName, $userLastName, $userNickName);
+        mysqli_stmt_store_result($st);
+        mysqli_stmt_fetch($st);
+
         echo '<table style="color:white;border:1px solid white;padding:6px;">
         <td style="color:white;border:1px solid white;padding:6px;">'.$projectId.'</td>'.
         '<td style="color:white;border:1px solid white;padding:6px;">
@@ -379,20 +335,12 @@ else
         <input type="submit" name="viewProject" value="'.$projectName.'"></form></td>'.
         '<td style="color:white;border:1px solid white;padding:6px;">'.$projectCreationDate.'</td>'.
         '<td style="color:white;border:1px solid white;padding:6px;">'.$totalcost.'</td>'.
+        '<td style="color:white;border:1px solid white;padding:6px;">'.$userNickName.' '.$userLastName.'</td>'.
         '<td style="color:white;border:1px solid white;padding:6px;">
-        <form action="../Webpages/project.php" method="post">
+        <form action="../Webpages/editproject.php" method="post">
         <input type="hidden" name="editId" value="'.$projectId.'">
-        <input type="submit" name="editProject" value="'.$projectName.'"></form></td></table>';
+        <input type="submit" name="editProject" value="Bewerk"></form></td></table>';
         echo '<p style="color:white">'.$newdate.'</p>';
-        echo '<p style="color:white">'.$_POST["filterProjectsUsers"].'</p>';
-        echo '<p style="color:white">'.$_POST["filterProjectsDate"].'</p>';
-        echo '<p style="color:white">'.$_POST["filterUsers"].'</p>';
-
-        /*
-        <form action="../Processpages/createprojecttoeditproject.php" method="post">
-        <input type="text" name="projectname" id="" placeholder="Project naam">
-        <input type="submit" name="createproject" value="Maak project">
-        </form> */
     }
 }
 ?>

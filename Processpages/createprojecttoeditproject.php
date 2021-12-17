@@ -69,6 +69,6 @@ else
         //Creating session values
         $_SESSION["editProjectId"] = $rProjectId;
 
-        header("location: ../Webpages/editprofile.php");
+        header("location: ../Webpages/editproject.php");
     }
 }

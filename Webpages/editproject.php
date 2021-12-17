@@ -11,6 +11,42 @@ if (!isset($_SESSION["userId"]))
 }
 else 
 {
+    if (isset($_SESSION["editProjectId"]))
+    {
+        $editProjectId = $_SESSION["editProjectId"];
+    }
+    else if (isset($_POST["editId"]))
+    {
+        $editProjectId = $_POST["editId"];
+    }
+    else 
+    {
+        header("location: ../Webpages/error.php");
+        exit();
+    }
+
+    //Check connection
+    $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+    if (!$conn) 
+    {
+        header("location: ../Webpages/error.php");
+        exit();
+    }
+
+    //Navigation
+    $editprojectNavLinks1 = '<div>
+    <a href="../Webpages/home.php">Home</a>
+    <a href="../Processpages/deleteproject.php">Verwijder project</a>
+    </div>';
+
+    //Echo navigation
+    echo $editprojectNavLinks1;
+
+
+    $stmt = mysqli_prepare($conn, "SELECT * FROM projectcosts WHERE projectcostCodeId = ? ;");
+
+
+
     if (!isset($_POST["editId"]))
     {
         header("location: ../Webpages/error.php");
@@ -18,22 +54,6 @@ else
     }
     else
     {
-        //Check connection
-        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-        if (!$conn) 
-        {
-            header("location: ../Webpages/error.php");
-            exit();
-        }
-
-        //Navigation
-        $editprojectNavLinks1 = '<div>
-        <a href="../Webpages/home.php">Home</a>
-        <a href="../Processpages/deleteproject.php">Verwijder project</a>
-        </div>';
-
-        //Echo navigation
-        echo $editprojectNavLinks1;
 
         echo $_POST["editId"];
 
