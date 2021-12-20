@@ -301,6 +301,7 @@ else
     mysqli_stmt_store_result($stmt);
 
     //Gets data by project
+    $i = 0;
     while (mysqli_stmt_fetch($stmt)) 
     {
         $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
@@ -327,20 +328,60 @@ else
         mysqli_stmt_store_result($st);
         mysqli_stmt_fetch($st);
 
-        echo '<table style="color:white;border:1px solid white;padding:6px;">
-        <td style="color:white;border:1px solid white;padding:6px;">'.$projectId.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">
-        <form action="../Webpages/project.php" method="post">
-        <input type="hidden" name="viewId" value="'.$projectId.'">
-        <input type="submit" name="viewProject" value="'.$projectName.'"></form></td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$projectCreationDate.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$totalcost.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$userNickName.' '.$userLastName.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">
-        <form action="../Webpages/editproject.php" method="post">
-        <input type="hidden" name="editId" value="'.$projectId.'">
-        <input type="submit" name="editProject" value="Bewerk"></form></td></table>';
-        echo '<p style="color:white">'.$newdate.'</p>';
+        //creates table.
+        if ($i == 0) 
+        {
+            echo '<table>
+            <tr>
+                <td>Projectnummer</td>
+                <td>Projectnaam</td>
+                <td>Datum</td>
+                <td>Totale kosten</td>
+                <td>Verantwoordelijke</td>
+                <td>Project aanpassen</td>
+            </tr>
+            
+            <tr>
+                <td>'.$projectId.'</td>
+                <td>
+                    <form action="../Webpages/project.php" method="post">
+                    <input type="hidden" name="viewId" value="'.$projectId.'">
+                    <input type="submit" name="viewProject" value="'.$projectName.'"></form>
+                </td>
+                <td>'.$projectCreationDate.'</td>
+                <td>'.$totalcost.'</td>
+                <td>'.$userFirstName.' '.$userLastName.'</td>
+                <td>
+                    <form action="../Webpages/editproject.php" method="post">
+                    <input type="hidden" name="editId" value="'.$projectId.'">
+                    <input type="submit" name="editProject" value="Bewerk"></form>
+                </td>
+            </tr>';
+        }
+        else 
+        {
+            echo '<tr>
+            <td>'.$projectId.'</td>
+            <td>
+                <form action="../Webpages/project.php" method="post">
+                <input type="hidden" name="viewId" value="'.$projectId.'">
+                <input type="submit" name="viewProject" value="'.$projectName.'"></form>
+            </td>
+            <td>'.$projectCreationDate.'</td>
+            <td>'.$totalcost.'</td>
+            <td>'.$userFirstName.' '.$userLastName.'</td>
+            <td>
+                <form action="../Webpages/editproject.php" method="post">
+                <input type="hidden" name="editId" value="'.$projectId.'">
+                <input type="submit" name="editProject" value="Bewerk"></form>
+            </td>
+            </tr>';
+        }
+        $i++;
+    }
+    if ($i > 0)
+    {
+        echo '</table>';
     }
 }
 ?>

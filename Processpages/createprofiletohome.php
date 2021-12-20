@@ -13,7 +13,8 @@ else
     $lastname = htmlspecialchars($_POST["lastname"]);
     $nickname = htmlspecialchars($_POST["nickname"]);
     $gender = htmlspecialchars($_POST["gender"]);
-    $dateOfBirth = htmlspecialchars($_POST["dateOfBirth"]);
+    $dateOfBirth = htmlspecialchars($_POST["dateOfBirthYear"]).'-'.
+    htmlspecialchars($_POST["dateOfBirthMonth"]).'-'.htmlspecialchars($_POST["dateOfBirthDay"]);
     $email = htmlspecialchars($_POST["email"]);
     $password = htmlspecialchars($_POST["password"]);
     $passwordRepeat = htmlspecialchars($_POST["passwordRepeat"]);

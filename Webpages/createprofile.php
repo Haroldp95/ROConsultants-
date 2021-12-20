@@ -7,68 +7,68 @@
         <div class="row">
           <div class="loginContainer col-md-6">
             <div class="col-md-12">
-              <form action="" method="post">
+              <form action="../Processpages/createprofiletohome.php" method="post">
                 <h3 class="registerText"><i class="far fa-user"></i></h3>
                 <div class="form-group">
                   <label for="username" class="userText"
-                    ><i class="fas fa-user-alt"></i> Naam:</label
+                    ><i class="fas fa-user-alt"></i> Voornaam:</label
                   ><br />
                   <input
                     type="text"
-                    name="username"
+                    name="firstname"
                     id="username"
                     class="form-control input"
                   />
                 </div>
                 <div class="form-group">
                   <label for="username" class="userText"
-                    ><i class="fas fa-user-alt"></i> Achter Naam:</label
+                    ><i class="fas fa-user-alt"></i> Achternaam:</label
                   ><br />
                   <input
                     type="text"
-                    name="username"
+                    name="lastname"
                     id="username"
                     class="form-control input"
                   />
                 </div>
                 <div class="form-group">
                   <label for="username" class="userText"
-                    ><i class="fas fa-user-tie"></i> Gebruikers Naam:</label
+                    ><i class="fas fa-user-tie"></i> Roepnaam:</label
                   ><br />
                   <input
                     type="text"
-                    name="username"
+                    name="nickname"
                     id="username"
                     class="form-control input"
                   />
                 </div>
                 <div class="form-group">
                   <label for="username" class="userText"
-                    ><i class="fas fa-birthday-cake"></i> Geboorte Datum:</label
+                    ><i class="fas fa-birthday-cake"></i> Geboortedatum:</label
                   ><br />
                   <input
                     type="text"
-                    name="day"
+                    name="dateOfBirthDay"
                     id="day"
                     class="form-control input"
                   />
-                <select class="drowpdown" data-style="btn-inverse">
-                  <option>Januari</option>
-                  <option>Februari</option>
-                  <option>Maart</option>
-                  <option>April</option>
-                  <option>Mei</option>
-                  <option>Juni</option>
-                  <option>Juli</option>
-                  <option>Augustus</option>
-                  <option>September</option>
-                  <option>October</option>
-                  <option>November</option>
-                  <option>December</option>
+                <select name="dateOfBirthMonth" class="drowpdown" data-style="btn-inverse">
+                  <option value="1">Januari</option>
+                  <option value="2">Februari</option>
+                  <option value="3">Maart</option>
+                  <option value="4">April</option>
+                  <option value="5">Mei</option>
+                  <option value="6">Juni</option>
+                  <option value="7">Juli</option>
+                  <option value="8">Augustus</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
               </select>
               <input
                     type="text"
-                    name="year"
+                    name="dateOfBirthYear"
                     id="year"
                     class="form-control input"
                   />
@@ -77,10 +77,10 @@
                   <label for="username" class="userText"
                     ><i class="fas fa-venus-mars"></i> Geslacht:</label
                   ><br />
-                  <select class="drowpdown" data-style="btn-inverse">
-                    <option>Man</option>
-                    <option>Vrouw</option>
-                    <option>Neutraal</option>
+                  <select name="gender" class="drowpdown" data-style="btn-inverse">
+                    <option value="men">Man</option>
+                    <option value="woman">Vrouw</option>
+                    <option value="neutral">Neutraal</option>
                 </select>
                 </div>
                 <div class="form-group">
@@ -89,7 +89,7 @@
                   ><br />
                   <input
                     type="text"
-                    name="password"
+                    name="email"
                     id="password"
                     class="form-control input"
                   />
@@ -122,7 +122,7 @@
                   ><br />
                   <input
                     type="text"
-                    name="password"
+                    name="passwordRepeat"
                     id="password"
                     class="form-control input"
                   />
@@ -131,7 +131,7 @@
                   <br>
                   <input
                     type="submit"
-                    name="aanmelden"
+                    name="createAccount"
                     class="btn btn-info btn-md submitBtn"
                     value="Aanmelden"
                   />
@@ -147,31 +147,31 @@
         </div>
       </div>
     <?php 
-        //Errors
-        if (isset($_GET["error"])) 
-        {
-            $error = $_GET["error"];
-            if ($error == "emptyField") 
-            {
-                echo '<div class="error"><p>U moet alle velden invullen!</p></div>';
-            } 
-            else if ($error == "invalidInput") 
-            {
-                echo '<div class="error"><p>Ongeldige input!</p></div>';
-            } 
-            else if ($error == "invalidEmail") 
-            {
-                echo '<div class="error"><p>Ongeldige email!</p></div>';
-            } 
-            else if ($error == "invalidPassword") 
-            {
-                echo '<div class="error"><p>Wachtwoord verkeerd!</p></div>';
-            } 
-            else 
-            {
-                echo '<div class="error"><p>Error!</p></div>';
-            }
-        }
+      //Errors
+      if (isset($_GET["error"])) 
+      {
+          $error = $_GET["error"];
+          if ($error == "emptyField") 
+          {
+              echo '<div class="error"><p>U moet alle velden invullen!</p></div>';
+          } 
+          else if ($error == "invalidInput") 
+          {
+              echo '<div class="error"><p>Ongeldige input!</p></div>';
+          } 
+          else if ($error == "invalidEmail") 
+          {
+              echo '<div class="error"><p>Ongeldige email!</p></div>';
+          } 
+          else if ($error == "invalidPassword") 
+          {
+              echo '<div class="error"><p>Wachtwoord verkeerd!</p></div>';
+          } 
+          else 
+          {
+              echo '<div class="error"><p>Error!</p></div>';
+          }
+      }
     ?>
 </div>
 
