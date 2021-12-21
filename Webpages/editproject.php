@@ -42,74 +42,124 @@ else
     //Echo navigation
     echo $editprojectNavLinks1;
 
-
-    $stmt = mysqli_prepare($conn, "SELECT * FROM projectcosts WHERE projectcostCodeId = ? ;");
-
-
-
-    if (!isset($_POST["editId"]))
-    {
-        header("location: ../Webpages/error.php");
-        exit();
-    }
-    else
-    {
-
-        echo $_POST["editId"];
-
-
-        //print alle informatie in input elementen
-        //informatie: projectkosten: datum project kost, datum invoering projectkost
-        // hoeveelheid projectkost, het projectnummer(id), gebruiker die kosten toevoegde en kostencode.
-        // projectmembers: projectnummer(id), userId
-
-        //Pagina laadt alle kosten en projectmembers in (hetzelfde als project.php), 
-        //Ingeladen kosten en projectmembers zijn aan te passen,
-        //Knop onder aan pagina voor het opslaan van veranderingen,
-        //En eventueel knop voor niet opslaan,
-        //Vergeet niet dat kosten en projectmembers hier ook moeten kunnen worden verwijderd.
-
-    }
-    /*
-    //Gets project id's
-    $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-    $stmt = mysqli_prepare($conn, $sql1);
-    sql2();
+    //select projects.projectid, users.userFirstName etc
+    $stmt = mysqli_prepare($conn, "SELECT projects.projectId, projects.projectName, costs.costId, 
+    costs.costName, projectcosts.projectcostDate, users.userFirstName, users.userLastName, 
+    projectcosts.projectcostAmount FROM projectcosts 
+    INNER JOIN projects ON projectcosts.projectcostCodeId = projects.projectId
+    INNER JOIN users ON projectcosts.projectcostUserId = users.userId
+    INNER JOIN costs ON projectcosts.projectcostCostId = costs.costId
+    WHERE projectcostCodeId = ? ;");
+    mysqli_stmt_bind_param($stmt, 'i', $editProjectId);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $project);
+    mysqli_stmt_bind_result($stmt, $vProjectId, $vProjectName, 
+    $vCostId, $vCostName, $vCostDate, $vFirstName, $vLastName, $vCostAmount);
     mysqli_stmt_store_result($stmt);
 
-    //Gets data by project
-    while (mysqli_stmt_fetch($stmt)) 
+    //Creates table
+    $i = 0;
+    while (mysqli_stmt_fetch($stmt))
     {
-        $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-        $currentdate = date("Y-m-d H:i:s");
-        sql3();
-        $s = mysqli_prepare($conn, "SELECT projectId, projectName, projectCreationDate, projectUserId FROM projects WHERE projectId = ? ORDER BY projectCreationDate DESC ;");
-        mysqli_stmt_bind_param($s, 'i', $project);
-        mysqli_stmt_execute($s);
-        mysqli_stmt_bind_result($s, $projectId, $projectName, $projectCreationDate, $projectUserId);
-        mysqli_stmt_store_result($s);
-        mysqli_stmt_fetch($s);
+        if ($i == 0)
+        {
+            //First row: project id, projectname, cost id, 
+            //description, date, name person, cost amount
+            echo '<form action="../Processpages/editprojecttoproject.php" method="post">
+            <input type="hidden" name="editId" value="'.$vProjectId.'">
+            <table>
+            <tr>
+                <td>Projectnummer</td>
+                <td>Projectnaam</td>
+                <td>Kostencode</td>
+                <td>Kostenomschrijving</td>
+                <td>Datum</td>
+                <td>Verantwoordelijke</td>
+                <td>Bedrag</td>
+            </tr>
 
-        $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCodeId = ? ;");
-        mysqli_stmt_bind_param($t, 'i', $project);
-        mysqli_stmt_execute($t);
-        mysqli_stmt_bind_result($t, $totalcost);
-        mysqli_stmt_store_result($t);
-        mysqli_stmt_fetch($t);
+            <tr>
+                <td>'.$vProjectId.'</td>
+                <td><input type="text" name="editProjectname" placeholder="'.$vProjectName.'"></td>
+                <td>'.$vCostId.'</td>
+                <td>'.$vCostName.'</td>
+                <!--Hier moet <select> komen zie code hieronder-->
 
-        echo '<table style="color:white;border:1px solid white;padding:6px;">
-        <td style="color:white;border:1px solid white;padding:6px;">'.$projectId.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$projectName.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$projectCreationDate.'</td>'.
-        '<td style="color:white;border:1px solid white;padding:6px;">'.$totalcost.'</td></table>';
-        echo '<p style="color:white">'.$newdate.'</p>';
-        echo '<p style="color:white">'.$_POST["filterProjectsUsers"].'</p>';
-        echo '<p style="color:white">'.$_POST["filterProjectsDate"].'</p>';
-        echo '<p style="color:white">'.$_POST["filterUsers"].'</p>';
+                <td>'.$vCostDate.'</td>
+                <td>'.$vFirstName.' '.$vLastName.'</td>
+                <td>'.$vCostAmount.'</td>
+            </tr>';
+            /*
+
+            <input type="number" min="0" max="23.99" step="0.01">
+
+            <label for="filterProjectsUsersOwn">Selecteer projecten medewerker</label>
+            <select name="filterProjectsUsersSelect">';
+            
+            //Code for <select user>
+            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+            $m = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
+            mysqli_stmt_execute($m);
+            mysqli_stmt_bind_result($m, $rId, $rFirstName, $rLastName);
+            mysqli_stmt_store_result($m);
+
+            while (mysqli_stmt_fetch($m)) 
+            {
+                $homeNavFilter2 .= '<option value="'.$rId.'">'.
+                $rFirstName.' '.$rLastName.'</option>';
+            }
+            
+            $homeNavFilter2 .= '</select>
+            */
+
+        }
+        else
+        {
+            //Second row: empty, empty, cost id, 
+            //description, date, name person, cost amount
+            echo '<tr>
+                <td></td>
+                <td></td>
+                <td>'.$vCostId.'</td>
+                <td>'.$vCostName.'</td>
+                <td>'.$vCostDate.'</td>
+                <td>'.$vFirstName.' '.$vLastName.'</td>
+                <td>'.$vCostAmount.'</td>
+            </tr>';
+        }
+        $i++;
     }
-    */
+    //Last row: empty, empty, empty, empty, empty, total:, sum(costs)
+    $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCodeId = ? ;");
+    mysqli_stmt_bind_param($t, 'i', $editProjectId);
+    mysqli_stmt_execute($t);
+    mysqli_stmt_bind_result($t, $vSumCost);
+    mysqli_stmt_store_result($t);
+    mysqli_stmt_fetch($t);
+    
+    echo '<tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Totaal</td>
+        <td>'.$vSumCost.'</td>
+    </tr>
+    </table>';
+
+    //Add cost
+    echo '<p>Toevoegen kosten</p>';
+
+    //Add projectmember
+    echo '<p>Toevoegen projectleden</p>';
+
+    //End of form
+    echo '<input type="submit" name="editProject" value="Wijzigen opslaan">
+    </form>
+    <form action="../Webpages/project.php" method="post">
+    <input type="hidden" name="viewId" value="'.$vProjectId.'">
+    <input type="submit" name="viewProject" value="Wijzigen verwerpen">
+    </form>';
 }
 ?>
 

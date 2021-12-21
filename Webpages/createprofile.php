@@ -100,7 +100,7 @@
                   ><br />
                   <input
                     type="text"
-                    name="password"
+                    name="mobile"
                     id="password"
                     class="form-control input"
                   />
