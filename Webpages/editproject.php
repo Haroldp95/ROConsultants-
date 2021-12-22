@@ -64,7 +64,7 @@ else
         {
             //First row: project id, projectname, cost id, 
             //description, date, name person, cost amount
-            echo '<form action="../Processpages/editprojecttoproject.php" method="post">
+            $editProjectContent1 = '<form action="../Processpages/editprojecttoproject.php" method="post">
             <input type="hidden" name="editId" value="'.$vProjectId.'">
             <table>
             <tr>
@@ -79,52 +79,95 @@ else
 
             <tr>
                 <td>'.$vProjectId.'</td>
-                <td><input type="text" name="editProjectname" placeholder="'.$vProjectName.'"></td>
+                <td><input type="text" name="editProjectName" placeholder="Projectnaam" value="'.$vProjectName.'"></td>
                 <td>'.$vCostId.'</td>
-                <td>'.$vCostName.'</td>
-                <!--Hier moet <select> komen zie code hieronder-->
+                <td>
+                <select name="editProjectCostSelect">';
 
-                <td>'.$vCostDate.'</td>
-                <td>'.$vFirstName.' '.$vLastName.'</td>
-                <td>'.$vCostAmount.'</td>
+                $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+                $m = mysqli_prepare($conn, "SELECT costId, costName FROM costs;");
+                mysqli_stmt_execute($m);
+                mysqli_stmt_bind_result($m, $rCostId, $rCostName);
+                mysqli_stmt_store_result($m);
+
+                while (mysqli_stmt_fetch($m)) 
+                {
+                    $editProjectContent1 .= '<option value="'.$rCostId.'">'.
+                    $rCostName.'</option>';
+                }
+
+
+                $editProjectContent1 .= '</select></td>
+                <td><input type="text" name="editProjectDate" placeholder="DD-MM-YYYY" 
+                value="'.strftime("%d-%m-%Y", strtotime($vCostDate)).'"></td>
+                <td>
+                <select name="editProjectMemberSelect">';
+
+                $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+                $s = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
+                mysqli_stmt_execute($s);
+                mysqli_stmt_bind_result($s, $rUserId, $rFirstName, $rLastName);
+                mysqli_stmt_store_result($s);
+
+                while (mysqli_stmt_fetch($s)) 
+                {
+                    $editProjectContent1 .= '<option value="'.$rUserId.'">'.
+                    $rFirstName.' '.$rLastName.'</option>';
+                }
+
+                $editProjectContent1 .= '</select></td>
+                <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
             </tr>';
-            /*
 
-            <input type="number" min="0" max="23.99" step="0.01">
-
-            <label for="filterProjectsUsersOwn">Selecteer projecten medewerker</label>
-            <select name="filterProjectsUsersSelect">';
-            
-            //Code for <select user>
-            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
-            $m = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
-            mysqli_stmt_execute($m);
-            mysqli_stmt_bind_result($m, $rId, $rFirstName, $rLastName);
-            mysqli_stmt_store_result($m);
-
-            while (mysqli_stmt_fetch($m)) 
-            {
-                $homeNavFilter2 .= '<option value="'.$rId.'">'.
-                $rFirstName.' '.$rLastName.'</option>';
-            }
-            
-            $homeNavFilter2 .= '</select>
-            */
+            echo $editProjectContent1;
 
         }
         else
         {
             //Second row: empty, empty, cost id, 
             //description, date, name person, cost amount
-            echo '<tr>
-                <td></td>
-                <td></td>
-                <td>'.$vCostId.'</td>
-                <td>'.$vCostName.'</td>
-                <td>'.$vCostDate.'</td>
-                <td>'.$vFirstName.' '.$vLastName.'</td>
-                <td>'.$vCostAmount.'</td>
+            $editProjectContent2 = '<tr>
+            <td></td>
+            <td></td>
+            <td>'.$vCostId.'</td>
+            <td>
+            <select name="editProjectCostSelect'.$i.'">';
+
+            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+            $m = mysqli_prepare($conn, "SELECT costId, costName FROM costs;");
+            mysqli_stmt_execute($m);
+            mysqli_stmt_bind_result($m, $rCostId, $rCostName);
+            mysqli_stmt_store_result($m);
+
+            while (mysqli_stmt_fetch($m)) 
+            {
+                $editProjectContent2 .= '<option value="'.$rCostId.'">'.
+                $rCostName.'</option>';
+            }
+
+            $editProjectContent2 .= '</select></td>
+            <td><input type="text" name="editProjectDate" placeholder="DD-MM-YYYY" 
+            value="'.strftime("%d-%m-%Y", strtotime($vCostDate)).'"></td>
+            <td>
+            <select name="editProjectMemberSelect'.$i.'">';
+
+            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+            $s = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
+            mysqli_stmt_execute($s);
+            mysqli_stmt_bind_result($s, $rUserId, $rFirstName, $rLastName);
+            mysqli_stmt_store_result($s);
+
+            while (mysqli_stmt_fetch($s)) 
+            {
+                $editProjectContent2 .= '<option value="'.$rUserId.'">'.
+                $rFirstName.' '.$rLastName.'</option>';
+            }
+
+            $editProjectContent2 .= '</select></td>
+            <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
             </tr>';
+
+            echo $editProjectContent2;
         }
         $i++;
     }
@@ -149,12 +192,77 @@ else
 
     //Add cost
     echo '<p>Toevoegen kosten</p>';
+    $addCost = '<table>
+        <tr>
+            <td>Kostencode(javascript)</td>
+            <td>
+            <select name="editProjectAddCostSelect">';
+
+            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+            $m = mysqli_prepare($conn, "SELECT costId, costName FROM costs;");
+            mysqli_stmt_execute($m);
+            mysqli_stmt_bind_result($m, $rCostId, $rCostName);
+            mysqli_stmt_store_result($m);
+
+            while (mysqli_stmt_fetch($m)) 
+            {
+                $addCost .= '<option value="'.$rCostId.'">'.
+                $rCostName.'</option>';
+            }
+
+            $addCost .= '</select></td>
+            <td><input type="text" name="editProjectDate" placeholder="DD-MM-YYYY" 
+            value="'.strftime("%d-%m-%Y", strtotime($vCostDate)).'"></td>
+            <td>
+            <select name="editProjectAddMemberSelect">';
+
+            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+            $s = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
+            mysqli_stmt_execute($s);
+            mysqli_stmt_bind_result($s, $rUserId, $rFirstName, $rLastName);
+            mysqli_stmt_store_result($s);
+
+            while (mysqli_stmt_fetch($s)) 
+            {
+                $addCost .= '<option value="'.$rUserId.'">'.
+                $rFirstName.' '.$rLastName.'</option>';
+            }
+
+            $addCost .= '</select></td>
+            <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
+        </tr>
+        </table>';
+    echo $addCost;
+    echo '<button>Toevoegen kostenpost</button>';
 
     //Add projectmember
     echo '<p>Toevoegen projectleden</p>';
+    $addMember = '<table>
+        <tr>
+            <td>
+            <select name="editProjectAddMember">';
+
+            $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
+            $s = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");
+            mysqli_stmt_execute($s);
+            mysqli_stmt_bind_result($s, $rUserId, $rFirstName, $rLastName);
+            mysqli_stmt_store_result($s);
+
+            $addMember .= '<option value="0">Geen extra projectlid</option>';
+
+            while (mysqli_stmt_fetch($s)) 
+            {
+                $addMember .= '<option value="'.$rUserId.'">'.
+                $rFirstName.' '.$rLastName.'</option>';
+            }
+    $addMember .= '</select></td></tr></table>';
+
+    echo $addMember;
+    echo '<button>Toevoegen projectlid</button>';
 
     //End of form
     echo '<input type="submit" name="editProject" value="Wijzigen opslaan">
+    <input type="reset" value="Wijzigen resetten">
     </form>
     <form action="../Webpages/project.php" method="post">
     <input type="hidden" name="viewId" value="'.$vProjectId.'">
