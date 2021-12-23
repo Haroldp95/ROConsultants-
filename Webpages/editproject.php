@@ -192,11 +192,12 @@ else
 
     //Add cost
     echo '<p>Toevoegen kosten</p>';
-    $addCost = '<table>
-        <tr>
+    $addCost = '<table id="tableAddCost">
+        <input type="hidden" name="counterAddCost" value="0" id="counterAddCostId">
+        <tr id="costrow0">
             <td>Kostencode(javascript)</td>
             <td>
-            <select name="editProjectAddCostSelect">';
+            <select name="editProjectAddCostSelect" id="editProjectAddCostSelectId">';
 
             $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
             $m = mysqli_prepare($conn, "SELECT costId, costName FROM costs;");
@@ -210,9 +211,10 @@ else
                 $rCostName.'</option>';
             }
 
+            $today = date("d-m-Y");
             $addCost .= '</select></td>
             <td><input type="text" name="editProjectDate" placeholder="DD-MM-YYYY" 
-            value="'.strftime("%d-%m-%Y", strtotime($vCostDate)).'"></td>
+            value="'.strftime("%d-%m-%Y", strtotime($today)).'"></td>
             <td>
             <select name="editProjectAddMemberSelect">';
 
@@ -229,16 +231,22 @@ else
             }
 
             $addCost .= '</select></td>
-            <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
+            <td><input type="number" step="0.01" value="0"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" onclick="addCostProject()" value="Toevoegen kostenpost">
+            </td>
         </tr>
         </table>';
     echo $addCost;
-    echo '<button>Toevoegen kostenpost</button>';
+    //echo '<button onclick="addCostProject">Toevoegen kostenpost</button>';
 
     //Add projectmember
     echo '<p>Toevoegen projectleden</p>';
-    $addMember = '<table>
-        <tr>
+    $addMember = '<table id="tableAddMember">
+        <input type="hidden" name="counterAddMember" value="0" id="counterAddMemberId">
+        <tr id="memberrow0">
             <td>
             <select name="editProjectAddMember">';
 
@@ -255,10 +263,16 @@ else
                 $addMember .= '<option value="'.$rUserId.'">'.
                 $rFirstName.' '.$rLastName.'</option>';
             }
-    $addMember .= '</select></td></tr></table>';
+    $addMember .= '</select></td></tr>
+        <tr>
+            <td>
+                <input type="button" onclick="addMemberProject()" value="Toevoegen projectlid">
+            </td>
+        </tr>
+        </table>';
 
     echo $addMember;
-    echo '<button>Toevoegen projectlid</button>';
+    //echo '<button onclick="addMemberProject">Toevoegen projectlid</button>';
 
     //End of form
     echo '<input type="submit" name="editProject" value="Wijzigen opslaan">

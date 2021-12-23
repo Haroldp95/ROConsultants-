@@ -24,4 +24,5 @@
 
   <!-- Javascript -->
   <script src="../Javascript/index.js"></script>
+  <script src="../Javascript/editproject.js"></script>
 </head>
