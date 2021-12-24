@@ -44,7 +44,7 @@ else
 
     //select projects.projectid, users.userFirstName etc
     $stmt = mysqli_prepare($conn, "SELECT projects.projectId, projects.projectName, costs.costId, 
-    costs.costName, projectcosts.projectcostDate, users.userFirstName, users.userLastName, 
+    costs.costName, projectcosts.projectcostId, projectcosts.projectcostDate, users.userFirstName, users.userLastName, 
     projectcosts.projectcostAmount FROM projectcosts 
     INNER JOIN projects ON projectcosts.projectcostCodeId = projects.projectId
     INNER JOIN users ON projectcosts.projectcostUserId = users.userId
@@ -53,7 +53,7 @@ else
     mysqli_stmt_bind_param($stmt, 'i', $editProjectId);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $vProjectId, $vProjectName, 
-    $vCostId, $vCostName, $vCostDate, $vFirstName, $vLastName, $vCostAmount);
+    $vCostId, $vCostName, $vProjectCostId, $vCostDate, $vFirstName, $vLastName, $vCostAmount);
     mysqli_stmt_store_result($stmt);
 
     //Creates table
@@ -75,6 +75,7 @@ else
                 <td>Datum</td>
                 <td>Verantwoordelijke</td>
                 <td>Bedrag</td>
+                <td>Kostenpost verwijderen</td>
             </tr>
 
             <tr>
@@ -117,6 +118,7 @@ else
 
                 $editProjectContent1 .= '</select></td>
                 <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
+                <td><input type="checkbox" name="cost'.$vProjectCostId.'" value="c'.$vProjectCostId.'"></td>
             </tr>';
 
             echo $editProjectContent1;
@@ -165,6 +167,7 @@ else
 
             $editProjectContent2 .= '</select></td>
             <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
+            <td><input type="checkbox" name="cost'.$vProjectCostId.'" value="c'.$vProjectCostId.'"></td>
             </tr>';
 
             echo $editProjectContent2;
@@ -172,6 +175,7 @@ else
         $i++;
     }
     //Last row: empty, empty, empty, empty, empty, total:, sum(costs)
+    /*
     $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCodeId = ? ;");
     mysqli_stmt_bind_param($t, 'i', $editProjectId);
     mysqli_stmt_execute($t);
@@ -187,8 +191,8 @@ else
         <td></td>
         <td>Totaal</td>
         <td>'.$vSumCost.'</td>
-    </tr>
-    </table>';
+    </tr> */
+    echo '</table>';
 
     //Add cost
     echo '<p>Toevoegen kosten</p>';
@@ -237,6 +241,9 @@ else
             <td>
                 <input type="button" onclick="addCostProject()" value="Toevoegen kostenpost">
             </td>
+            <td>
+                <input type="button" onclick="removeCostProject()" value="Verwijderen kostenpost">
+            </td>
         </tr>
         </table>';
     echo $addCost;
@@ -267,6 +274,9 @@ else
         <tr>
             <td>
                 <input type="button" onclick="addMemberProject()" value="Toevoegen projectlid">
+            </td>
+            <td>
+                <input type="button" onclick="removeMemberProject()" value="Verwijderen projectlid">
             </td>
         </tr>
         </table>';
