@@ -78,7 +78,7 @@ else
                 <td>Kostenpost verwijderen</td>
             </tr>
 
-            <tr>
+            <tr id="eRow'.$i.'">
                 <td>'.$vProjectId.'</td>
                 <td><input type="text" name="editProjectName" placeholder="Projectnaam" value="'.$vProjectName.'"></td>
                 <td>'.$vCostId.'</td>
@@ -128,7 +128,7 @@ else
         {
             //Second row: empty, empty, cost id, 
             //description, date, name person, cost amount
-            $editProjectContent2 = '<tr>
+            $editProjectContent2 = '<tr id="eRow'.$i.'">
             <td></td>
             <td></td>
             <td>'.$vCostId.'</td>
@@ -174,6 +174,9 @@ else
         }
         $i++;
     }
+    //Counter amount of rows
+    echo '<input type="hidden" name="editIdC" value="'.$i.'">';
+
     //Last row: empty, empty, empty, empty, empty, total:, sum(costs)
     /*
     $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCodeId = ? ;");
