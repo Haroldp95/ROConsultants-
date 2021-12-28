@@ -4,12 +4,12 @@
 function addCostProject() 
 {
     var c = document.getElementById("counterAddCostId").value;
-    var d = document.getElementById("tableAddCost");
+    var d = document.getElementById("tableEditCostId");
     c++;
 
-    d.insertRow(c).id = "costrow"+c;
-    var m = document.getElementById("costrow"+c);
-    m.innerHTML = document.getElementById("costrow0").innerHTML;
+    d.insertRow(c).id = "addCost"+c;
+    var m = document.getElementById("addCost"+c);
+    m.innerHTML = document.getElementById("addCost1").innerHTML;
     document.getElementById("counterAddCostId").value = c;
 }
 
@@ -20,7 +20,7 @@ function removeCostProject()
     if (e >= 1)
     {
         var e = document.getElementById("counterAddCostId").value;
-        var f = document.getElementById("costrow"+e);
+        var f = document.getElementById("addCost"+e);
         f.remove();
         e--;
         document.getElementById("counterAddCostId").value = e;
