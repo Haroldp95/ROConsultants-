@@ -9,7 +9,7 @@ function addCostProject()
 
     d.insertRow(c).id = "addCost"+c;
     var m = document.getElementById("addCost"+c);
-    m.innerHTML = document.getElementById("addCost1").innerHTML;
+    m.innerHTML = document.getElementById("addCost0").innerHTML;
     document.getElementById("counterAddCostId").value = c;
 }
 
