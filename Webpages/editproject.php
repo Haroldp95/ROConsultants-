@@ -82,7 +82,7 @@ else
                 <tbody>
                     <tr id="addCost0" style="display:none;">
                         <td>Kostencode(JavaScript)</td>
-                        <td><select name="editProjectCostSelect'.$i.'">';
+                        <td><select name="editProjectCostSelect'. $i .'" id="select0">';
 
                         $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
                         $m = mysqli_prepare($conn, "SELECT costId, costName FROM costs;");
@@ -113,7 +113,7 @@ else
                     </tr>
                     <tr id="addCost1">
                         <td>Kostencode(JavaScript)</td>
-                        <td><select name="editProjectCostSelect'.$i.'">';
+                        <td><select name="editProjectCostSelect'. $i + 1 .'">';
 
                         $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
                         $m = mysqli_prepare($conn, "SELECT costId, costName FROM costs;");
@@ -136,9 +136,9 @@ else
                         }
 
                         $editProjectContent1 .= '</td>
-                        <td><input type="text" name="editProjectDate" placeholder="DD-MM-YYYY" 
+                        <td><input type="text" name="editProjectDate'. $i + 1 .'" placeholder="DD-MM-YYYY" 
                         value="'.strftime("%d-%m-%Y", strtotime($vCostDate)).'"></td>
-                        <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
+                        <td><input name="editProjectAmount'. $i + 1 .'" type="number" step="0.01" value="'.$vCostAmount.'"></td>
                     </tr>';
             
             echo $editProjectContent1;
@@ -148,7 +148,7 @@ else
             $editProjectContent2 = '
                 <tr id="addCost'. $i + 1 .'">
                     <td>Kostencode(JavaScript)</td>
-                    <td><select name="editProjectCostSelect'.$i.'">';
+                    <td><select name="editProjectCostSelect'. $i + 1 .'">';
 
                     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
                     $m = mysqli_prepare($conn, "SELECT costId, costName FROM costs;");
@@ -171,9 +171,9 @@ else
                     }
 
                     $editProjectContent2 .= '</td>
-                    <td><input type="text" name="editProjectDate" placeholder="DD-MM-YYYY" 
+                    <td><input type="text" name="editProjectDate'. $i + 1 .'" placeholder="DD-MM-YYYY" 
                     value="'.strftime("%d-%m-%Y", strtotime($vCostDate)).'"></td>
-                    <td><input type="number" step="0.01" value="'.$vCostAmount.'"></td>
+                    <td><input name="editProjectAmount'. $i + 1 .'" type="number" step="0.01" value="'.$vCostAmount.'"></td>
                 </tr>
                 ';
             
@@ -182,7 +182,7 @@ else
         $i++;
     }
     echo '
-        <input type="hidden" name="counterAddCost" value="'. $i .'" id="counterAddCostId">
+        <input type="hidden" name="counterAddCost" value="'. $i + 1 .'" id="counterAddCostId">
         </tbody></table>
         <input type="button" onclick="addCostProject()" value="Toevoegen kostenpost">
         <input type="button" onclick="removeCostProject()" value="Verwijderen kostenpost">   
@@ -194,7 +194,7 @@ else
         <input type="hidden" name="counterAddMember" value="0" id="counterAddMemberId">
         <tr style="display:none;" id="memberrow0">
             <td>
-            <select name="editProjectAddMember">';
+            <select name="editProjectAddMember" id="select00">';
 
             $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
             $s = mysqli_prepare($conn, "SELECT userId, userFirstName, userLastName FROM users;");

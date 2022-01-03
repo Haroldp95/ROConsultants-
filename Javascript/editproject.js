@@ -5,11 +5,18 @@ function addCostProject()
 {
     var c = document.getElementById("counterAddCostId").value;
     var d = document.getElementById("tableEditCostId");
+    var x = document.getElementById("select0");
     c++;
 
     d.insertRow(c).id = "addCost"+c;
     var m = document.getElementById("addCost"+c);
-    m.innerHTML = document.getElementById("addCost0").innerHTML;
+    //m.innerHTML = document.getElementById("addCost0").innerHTML;
+    m.innerHTML = '<td>Kostencode(JavaScript)</td>'+
+    '<td><select name="editProjectCostSelect'+c+'">'+
+    x.innerHTML+'</select></td>'+
+    '<td><input type="text" name="editProjectDate'+c+'" placeholder="DD-MM-YYYY"></td>'+
+    '<td><input name="editProjectAmount'+c+'" type="number" step="0.01" value="0"></td>';
+
     document.getElementById("counterAddCostId").value = c;
 }
 
@@ -32,11 +39,13 @@ function addMemberProject()
 {
     var i = document.getElementById("counterAddMemberId").value;
     var j = document.getElementById("tableAddMember");
+    var y = document.getElementById("select00");
     i++;
 
     j.insertRow(i).id = "memberrow"+i;
     var m = document.getElementById("memberrow"+i);
-    m.innerHTML = document.getElementById("memberrow0").innerHTML;
+    m.innerHTML = '<td><select name="editProjectAddMember'+i+'">'+
+    y.innerHTML+'</select></td>';
     document.getElementById("counterAddMemberId").value = i;
 }
 

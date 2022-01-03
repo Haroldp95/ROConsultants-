@@ -34,6 +34,49 @@ else
             exit();
         }
 
+        //Data form
+        $projectId = htmlspecialchars($_POST["editId"]);
+
+        //Functions
+        function CheckInputA($input) 
+        {
+            return preg_match("/^[a-zA-Z -]*$/", $input);
+        }
+        function CheckInputB($input) 
+        {
+            return preg_match("/[^ -]/", $input);
+        }
+
+        //Projectname
+        $projectName = htmlspecialchars($_POST["editProjectName"]);
+
+        
+        if (empty($projectName))
+        {
+            $_SESSION["editProjectId"] = $projectId;
+            header("location: ../Webpages/editproject.php?error=emptyField");
+            exit();
+        }
+        else if (!CheckInputA($projectName))
+        {
+            $_SESSION["editProjectId"] = $projectId;
+            header("location: ../Webpages/editproject.php?error=invalidInput");
+            exit();
+        }
+        else if (!CheckInputB($projectName))
+        {
+            $_SESSION["editProjectId"] = $projectId;
+            header("location: ../Webpages/editproject.php?error=invalidInput");
+            exit();
+        }
+
+        $s1 = mysqli_prepare($conn, 'UPDATE projects SET projectName = ? ;');
+        mysqli_stmt_bind_param($s1, "s", $projectName);
+        mysqli_stmt_execute($s1);
+
+        //Project costs
+        
+
         //Invalid input
     }
 }
