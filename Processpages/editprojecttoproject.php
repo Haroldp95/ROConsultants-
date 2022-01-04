@@ -75,7 +75,7 @@ else
         mysqli_stmt_execute($s1);
 
         //Project costs
-        
+        //test
 
         //Invalid input
     }
