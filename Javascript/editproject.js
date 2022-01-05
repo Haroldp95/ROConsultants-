@@ -7,27 +7,27 @@ function addCostProject()
     var d = document.getElementById("tableEditCostId");
     var x = document.getElementById("select0");
     c++;
-
-    d.insertRow(c).id = "addCost"+c;
-    var m = document.getElementById("addCost"+c);
+    d.insertRow(c).id = "addCost"+(c-1);
+    var m = document.getElementById("addCost"+(c-1));
     //m.innerHTML = document.getElementById("addCost0").innerHTML;
     m.innerHTML = '<td>Kostencode(JavaScript)</td>'+
-    '<td><select name="editProjectCostSelect'+c+'">'+
+    '<td><select name="editProjectCostSelect'+(c-1)+'">'+
     x.innerHTML+'</select></td>'+
-    '<td><input type="text" name="editProjectDate'+c+'" placeholder="DD-MM-YYYY"></td>'+
-    '<td><input name="editProjectAmount'+c+'" type="number" step="0.01" value="0"></td>';
+    '<td><input type="text" name="editProjectDate'+(c-1)+'" placeholder="DD-MM-YYYY"></td>'+
+    '<td><input name="editProjectAmount'+(c-1)+'" type="number" step="0.01" value="0"></td>';
 
+    
     document.getElementById("counterAddCostId").value = c;
 }
 
-//Removes cost to editproject form
+//Removes cost from editproject form
 function removeCostProject() 
 {
     var e = document.getElementById("counterAddCostId").value;
     if (e >= 1)
     {
         var e = document.getElementById("counterAddCostId").value;
-        var f = document.getElementById("addCost"+e);
+        var f = document.getElementById("addCost"+(e-1));
         f.remove();
         e--;
         document.getElementById("counterAddCostId").value = e;
@@ -49,7 +49,7 @@ function addMemberProject()
     document.getElementById("counterAddMemberId").value = i;
 }
 
-//Removes member to editproject form
+//Removes member from editproject form
 function removeMemberProject() 
 {
     var g = document.getElementById("counterAddMemberId").value;
