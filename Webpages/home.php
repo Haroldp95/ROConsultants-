@@ -383,6 +383,37 @@ else
     {
         echo '</table>';
     }
+
+    //Gets empty projects
+    $stm = mysqli_prepare($conn, 'SELECT projectId, projectName, 
+    projectCreationDate, projectUserId FROM projects WHERE projectUserId = ? ;');
+    mysqli_stmt_bind_param($stm, 'i', $_SESSION["userId"]);
+    mysqli_stmt_execute($stm);
+    mysqli_stmt_bind_result($stm, $aId, $aName, $aDate, $aUserId);
+    mysqli_stmt_store_result($stm);
+
+    while (mysqli_stmt_fetch($stm))
+    {
+        $stm2 = mysqli_prepare($conn, 'SELECT projectcostId FROM projectcosts WHERE projectcostCodeId = ? ;');
+        mysqli_stmt_bind_param($stm2, 'i', $aId);
+        mysqli_stmt_execute($stm2);
+        mysqli_stmt_store_result($stm2);
+        
+        if (mysqli_stmt_num_rows($stm2) == 0) {
+            echo '<table>
+                <tr>
+                    <td>
+                    '.$aName.'
+                    </td>
+                    <td>
+                        <form action="../Webpages/editproject.php" method="post">
+                        <input type="hidden" name="editId" value="'.$aId.'">
+                        <input type="submit" name="editProject" value="Bewerk"></form>
+                    </td>
+                </tr>
+            </table>';
+        }
+    }
 }
 ?>
 

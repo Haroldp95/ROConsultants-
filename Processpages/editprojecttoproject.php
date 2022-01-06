@@ -123,6 +123,9 @@ else
             $i++;
         }
 
+        //Add new member
+        
+
         $_SESSION["viewProjectId"] = $projectId;
         header("location: ../Webpages/project.php");
         exit();
