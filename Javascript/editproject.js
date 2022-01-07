@@ -24,7 +24,7 @@ function addCostProject()
 function removeCostProject() 
 {
     var e = document.getElementById("counterAddCostId").value;
-    if (e >= 1)
+    if (e > 1)
     {
         var e = document.getElementById("counterAddCostId").value;
         var f = document.getElementById("addCost"+(e-1));

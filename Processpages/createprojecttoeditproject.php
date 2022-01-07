@@ -55,7 +55,7 @@ else
 
         //Add data to db
         $stmt = mysqli_prepare($conn, "INSERT INTO 
-        projects(projectName, projectCreationDate, projectUserId) VALUES(?, ?, ?)");
+        projects(projectName, projectCreationDate, projectUserId) VALUES(?, ?, ?) ;");
         mysqli_stmt_bind_param($stmt, "ssi", $projectname, $projectdate, $_SESSION["userId"]);
         mysqli_stmt_execute($stmt);
 
@@ -64,7 +64,13 @@ else
         $stmt = mysqli_prepare($conn, "SELECT MAX(projectId) FROM projects;");
         mysqli_stmt_execute($stmt);
         mysqli_stmt_bind_result($stmt, $rProjectId);
+        mysqli_stmt_store_result($stmt);
         mysqli_stmt_fetch($stmt);
+
+        $stmt = mysqli_prepare($conn, "INSERT INTO projectmembers(memberProjectId, memberUserId) 
+        VALUES(?, ?) ;");
+        mysqli_stmt_bind_param($stmt, "ii", $rProjectId, $_SESSION["userId"]);
+        mysqli_stmt_execute($stmt);
 
         //Creating session values
         $_SESSION["editProjectId"] = $rProjectId;

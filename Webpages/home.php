@@ -321,6 +321,14 @@ else
         mysqli_stmt_store_result($t);
         mysqli_stmt_fetch($t);
 
+        $t2 = mysqli_prepare($conn, "SELECT projectcostId FROM projectcosts WHERE projectcostCodeId = ? ; ");
+        mysqli_stmt_bind_param($t2, 'i', $project);
+        mysqli_stmt_execute($t2);
+        mysqli_stmt_store_result($t2);
+        if (mysqli_stmt_num_rows($t2) == 0) {
+            continue;
+        }
+
         $st = mysqli_prepare($conn, "SELECT userFirstName, userLastName, userNickName FROM users WHERE userId = ? ;");
         mysqli_stmt_bind_param($st, 'i', $projectUserId);
         mysqli_stmt_execute($st);
