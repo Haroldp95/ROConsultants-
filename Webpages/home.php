@@ -321,6 +321,7 @@ else
         mysqli_stmt_store_result($t);
         mysqli_stmt_fetch($t);
 
+        //Empty projects are skipped
         $t2 = mysqli_prepare($conn, "SELECT projectcostId FROM projectcosts WHERE projectcostCodeId = ? ; ");
         mysqli_stmt_bind_param($t2, 'i', $project);
         mysqli_stmt_execute($t2);
