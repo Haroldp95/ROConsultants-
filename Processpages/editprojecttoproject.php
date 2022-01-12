@@ -69,8 +69,8 @@ else
             exit();
         }
 
-        $s1 = mysqli_prepare($conn, 'UPDATE projects SET projectName = ? ;');
-        mysqli_stmt_bind_param($s1, "s", $projectName);
+        $s1 = mysqli_prepare($conn, 'UPDATE projects SET projectName = ? WHERE projectId = ? ;');
+        mysqli_stmt_bind_param($s1, "si", $projectName, $projectId);
         mysqli_stmt_execute($s1);
 
         //Project costs
