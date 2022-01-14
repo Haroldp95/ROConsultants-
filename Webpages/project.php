@@ -34,7 +34,7 @@ else
     }
 
     //Navigation
-    $editprojectNavLinks1 = '<div>
+    $editprojectNavLinks1 = '<div class="projectNavContainer">
     <a href="../Webpages/home.php">Home</a>
     <form action="../Webpages/editproject.php" method="post">
     <input type="hidden" name="editId" value="'.$viewProjectId.'">
@@ -66,25 +66,25 @@ else
         {
             //First row: project id, projectname, cost id, 
             //description, date, name person, cost amount
-            echo '<table>
+            echo '<div class="projectContainer"><table class="homeProjectsTable">
             <tr>
-                <td>Projectnummer</td>
-                <td>Projectnaam</td>
-                <td>Kostencode</td>
-                <td>Kostenomschrijving</td>
-                <td>Datum</td>
-                <td>Verantwoordelijke</td>
-                <td>Bedrag</td>
+                <td class="projectsTableTh">Projectnummer</td>
+                <td class="projectsTableTh">Projectnaam</td>
+                <td class="projectsTableTh">Kostencode</td>
+                <td class="projectsTableTh">Kostenomschrijving</td>
+                <td class="projectsTableTh">Datum</td>
+                <td class="projectsTableTh">Verantwoordelijke</td>
+                <td class="projectsTableTh">Bedrag</td>
             </tr>
 
             <tr>
-                <td>'.$vProjectId.'</td>
-                <td>'.$vProjectName.'</td>
-                <td>'.$vCostId.'</td>
-                <td>'.$vCostName.'</td>
-                <td>'.$vCostDate.'</td>
-                <td>'.$vFirstName.' '.$vLastName.'</td>
-                <td>'.$vCostAmount.'</td>
+                <td class="projectsTableTd2">'.$vProjectId.'</td>
+                <td class="projectsTableTd2">'.$vProjectName.'</td>
+                <td class="projectsTableTd2">'.$vCostId.'</td>
+                <td class="projectsTableTd2">'.$vCostName.'</td>
+                <td class="projectsTableTd2">'.$vCostDate.'</td>
+                <td class="projectsTableTd2">'.$vFirstName.' '.$vLastName.'</td>
+                <td class="projectsTableTd2">'.$vCostAmount.'</td>
             </tr>';
 
         }
@@ -93,13 +93,13 @@ else
             //Second row: empty, empty, cost id, 
             //description, date, name person, cost amount
             echo '<tr>
-                <td></td>
-                <td></td>
-                <td>'.$vCostId.'</td>
-                <td>'.$vCostName.'</td>
-                <td>'.$vCostDate.'</td>
-                <td>'.$vFirstName.' '.$vLastName.'</td>
-                <td>'.$vCostAmount.'</td>
+                <td class="projectsTableTd2"></td>
+                <td class="projectsTableTd2"></td>
+                <td class="projectsTableTd2">'.$vCostId.'</td>
+                <td class="projectsTableTd2">'.$vCostName.'</td>
+                <td class="projectsTableTd2">'.$vCostDate.'</td>
+                <td class="projectsTableTd2">'.$vFirstName.' '.$vLastName.'</td>
+                <td class="projectsTableTd2">'.$vCostAmount.'</td>
             </tr>';
         }
         $i++;
@@ -113,15 +113,15 @@ else
     mysqli_stmt_fetch($t);
     
     echo '<tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Totaal</td>
-        <td>'.$vSumCost.'</td>
+        <td class="projectsTableTd3"></td>
+        <td class="projectsTableTd3"></td>
+        <td class="projectsTableTd3"></td>
+        <td class="projectsTableTd3"></td>
+        <td class="projectsTableTd3"></td>
+        <td class="projectsTableTd3">Totaal</td>
+        <td class="projectsTableTd3">'.$vSumCost.'</td>
     </tr>
-    </table>';
+    </table></div>';
 }
 ?>
 

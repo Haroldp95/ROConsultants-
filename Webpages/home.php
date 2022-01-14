@@ -20,35 +20,35 @@ else
     }
 
     //Navigation variables
-    $homeNavLinks1 = '<div>
+    $homeNavLinks1 = '<div class="homeNavContainer">
     <a href="../Webpages/createproject.php">Nieuw project</a>
     <a href="../Webpages/profile.php">Profiel</a>';
-    $homeNavLinks2 = '<div>
+    $homeNavLinks2 = '<div class="homeNavContainer">
     <a href="../Webpages/createproject.php">Nieuw project</a>
     <a href="../Webpages/profile.php">Profiel</a>
     <a href="">Admin-pagina</a>';
     $homeNavFilter1 = '<form action="../Webpages/home.php" method="post">
     <p>Projecten van:</p>
     <input type="radio" name="filterProjectsDate" value="1month" id="filterProjects1Month">
-    <label for="filterProjects1Month">Laatste maand</label>
+    <label for="filterProjects1Month">Laatste maand</label><br>
     <input type="radio" name="filterProjectsDate" value="3months" id="filterProjects3Month">
-    <label for="filterProjects3Month">Laatste 3 maanden</label>
+    <label for="filterProjects3Month">Laatste 3 maanden</label><br>
     <input type="radio" name="filterProjectsDate" value="calendarYear" id="filterProjectsThisYear">
-    <label for="filterProjects1Year">Dit kalenderjaar</label>
+    <label for="filterProjects1Year">Dit kalenderjaar</label><br>
     <input type="radio" name="filterProjectsDate" value="year" id="filterProjects1Year">
-    <label for="filterProjects1Year">Dit jaar</label>
-    <input type="submit" name="filterProjects" value="Toon selectie">
+    <label for="filterProjects1Year">Dit jaar</label><br>
+    <input type="submit" name="filterProjects" value="Toon selectie" class="filterHomeBtn">
     </form>
     </div>';
     $homeNavFilter2 = '<form action="../Webpages/home.php" method="post">
     <p>Projecten van:</p>
     <input type="radio" name="filterProjectsUsers" value="ownProjects" id="filterProjectsUsersOwn">
-    <label for="filterProjectsUsersOwn">Eigen projecten</label>
+    <label for="filterProjectsUsersOwn">Eigen projecten</label><br>
     <input type="radio" name="filterProjectsUsers" value="allProjects" id="filterProjectsUsersAll">
-    <label for="filterProjectsUsersOwn">Alle projecten</label>
+    <label for="filterProjectsUsersOwn">Alle projecten</label><br>
     <input type="radio" name="filterProjectsUsers" value="empProjects" id="filterProjectsUsersEmp">
     <label for="filterProjectsUsersOwn">Selecteer projecten medewerker</label>
-    <select name="filterProjectsUsersSelect">';
+    <select name="filterProjectsUsersSelect" class="homeSelect">';
     
     //Code for <select user>
     $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
@@ -63,17 +63,17 @@ else
         $rFirstName.' '.$rLastName.'</option>';
     }
     
-    $homeNavFilter2 .= '</select>
+    $homeNavFilter2 .= '</select><br>
     <p>Projecten uit:</p>
     <input type="radio" name="filterProjectsDate" value="1month" id="filterProjects1Month">
-    <label for="filterProjects1Month">Laatste maand</label>
+    <label for="filterProjects1Month">Laatste maand</label><br>
     <input type="radio" name="filterProjectsDate" value="3months" id="filterProjects3Month">
-    <label for="filterProjects3Month">Laatste 3 maanden</label>
+    <label for="filterProjects3Month">Laatste 3 maanden</label><br>
     <input type="radio" name="filterProjectsDate" value="calendarYear" id="filterProjectsThisYear">
-    <label for="filterProjects1Year">Dit kalenderjaar</label>
+    <label for="filterProjects1Year">Dit kalenderjaar</label><br>
     <input type="radio" name="filterProjectsDate" value="year" id="filterProjects1Year">
-    <label for="filterProjects1Year">Dit jaar</label>
-    <input type="submit" name="filterProjects" value="Toon selectie">
+    <label for="filterProjects1Year">Dit jaar</label><br>
+    <input type="submit" name="filterProjects" value="Toon selectie" class="filterHomeBtn">
     </form>
     </div>';
 
@@ -307,15 +307,22 @@ else
         $conn = mysqli_connect('localhost', 'root', '', 'roconsultants');
         $currentdate = date("Y-m-d H:i:s");
         sql3();
-        $s = mysqli_prepare($conn, "SELECT projectId, projectName, projectCreationDate, projectUserId FROM projects WHERE projectId = ? ORDER BY projectCreationDate DESC ;");
+        $s = mysqli_prepare($conn, "SELECT projectId, projectName, projectCreationDate, projectUserId 
+        FROM projects WHERE projectId = ? 
+        ORDER BY projectCreationDate DESC ;");
         mysqli_stmt_bind_param($s, 'i', $project);
         mysqli_stmt_execute($s);
         mysqli_stmt_bind_result($s, $projectId, $projectName, $projectCreationDate, $projectUserId);
         mysqli_stmt_store_result($s);
         mysqli_stmt_fetch($s);
 
+        if ($projectCreationDate < $newdate)
+        {
+            continue;
+        }
+
         $t = mysqli_prepare($conn, "SELECT SUM(projectcostAmount) FROM projectcosts WHERE projectcostCodeId = ? ;");
-        mysqli_stmt_bind_param($t, 'i', $project);
+        mysqli_stmt_bind_param($t, 'i', $projectId);
         mysqli_stmt_execute($t);
         mysqli_stmt_bind_result($t, $totalcost);
         mysqli_stmt_store_result($t);
@@ -340,49 +347,49 @@ else
         //creates table.
         if ($i == 0) 
         {
-            echo '<table>
+            echo '<div class="homeProjectsContainer" ><table class="homeProjectsTable">
             <tr>
-                <td>Projectnummer</td>
-                <td>Projectnaam</td>
-                <td>Datum</td>
-                <td>Totale kosten</td>
-                <td>Verantwoordelijke</td>
-                <td>Project aanpassen</td>
+                <td class="projectsTableTh">Projectnummer</td>
+                <td class="projectsTableTh">Projectnaam</td>
+                <td class="projectsTableTh">Datum</td>
+                <td class="projectsTableTh">Totale kosten</td>
+                <td class="projectsTableTh">Verantwoordelijke</td>
+                <td class="projectsTableTh">Project aanpassen</td>
             </tr>
             
             <tr>
-                <td>'.$projectId.'</td>
-                <td>
+                <td class="projectsTableTd">'.$projectId.'</td>
+                <td class="projectsTableTd">
                     <form action="../Webpages/project.php" method="post">
                     <input type="hidden" name="viewId" value="'.$projectId.'">
-                    <input type="submit" name="viewProject" value="'.$projectName.'"></form>
+                    <input type="submit" name="viewProject" value="'.$projectName.'" class="btnViewProject"></form>
                 </td>
-                <td>'.$projectCreationDate.'</td>
-                <td>'.$totalcost.'</td>
-                <td>'.$userFirstName.' '.$userLastName.'</td>
-                <td>
+                <td class="projectsTableTd">'.$projectCreationDate.'</td>
+                <td class="projectsTableTd">'.$totalcost.'</td>
+                <td class="projectsTableTd">'.$userFirstName.' '.$userLastName.'</td>
+                <td class="projectsTableTd">
                     <form action="../Webpages/editproject.php" method="post">
                     <input type="hidden" name="editId" value="'.$projectId.'">
-                    <input type="submit" name="editProject" value="Bewerk"></form>
+                    <input type="submit" name="editProject" value="Bewerk"  class="btnEditProject"></form>
                 </td>
             </tr>';
         }
         else 
         {
             echo '<tr>
-            <td>'.$projectId.'</td>
-            <td>
+            <td class="projectsTableTd">'.$projectId.'</td>
+            <td class="projectsTableTd">
                 <form action="../Webpages/project.php" method="post">
                 <input type="hidden" name="viewId" value="'.$projectId.'">
-                <input type="submit" name="viewProject" value="'.$projectName.'"></form>
+                <input type="submit" name="viewProject" value="'.$projectName.'" class="btnViewProject"></form>
             </td>
-            <td>'.$projectCreationDate.'</td>
-            <td>'.$totalcost.'</td>
-            <td>'.$userFirstName.' '.$userLastName.'</td>
-            <td>
+            <td class="projectsTableTd">'.$projectCreationDate.'</td>
+            <td class="projectsTableTd">'.$totalcost.'</td>
+            <td class="projectsTableTd">'.$userFirstName.' '.$userLastName.'</td>
+            <td class="projectsTableTd">
                 <form action="../Webpages/editproject.php" method="post">
                 <input type="hidden" name="editId" value="'.$projectId.'">
-                <input type="submit" name="editProject" value="Bewerk"></form>
+                <input type="submit" name="editProject" value="Bewerk" class="btnEditProject"></form>
             </td>
             </tr>';
         }
@@ -390,7 +397,7 @@ else
     }
     if ($i > 0)
     {
-        echo '</table>';
+        echo '</table></div>';
     }
 
     //Gets empty projects
@@ -409,18 +416,20 @@ else
         mysqli_stmt_store_result($stm2);
         
         if (mysqli_stmt_num_rows($stm2) == 0) {
-            echo '<table>
+            echo '<div class="homeEmptyProject"><table>
                 <tr>
+                    <td>Leeg project:
+                    </td>
                     <td>
                     '.$aName.'
                     </td>
                     <td>
                         <form action="../Webpages/editproject.php" method="post">
                         <input type="hidden" name="editId" value="'.$aId.'">
-                        <input type="submit" name="editProject" value="Bewerk"></form>
+                        <input type="submit" name="editProject" value="Bewerk"  class="btnEditProject"></form>
                     </td>
                 </tr>
-            </table>';
+            </table></div>';
         }
     }
 }
