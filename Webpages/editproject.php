@@ -11,13 +11,13 @@ if (!isset($_SESSION["userId"]))
 }
 else 
 {
-    if (isset($_SESSION["editProjectId"]))
-    {
-        $editProjectId = $_SESSION["editProjectId"];
-    }
-    else if (isset($_POST["editId"]))
+    if (isset($_POST["editId"]))
     {
         $editProjectId = $_POST["editId"];
+    }
+    else if (isset($_SESSION["editProjectId"]))
+    {
+        $editProjectId = $_SESSION["editProjectId"];
     }
     else 
     {
@@ -34,7 +34,7 @@ else
     }
 
     //Navigation
-    $editprojectNavLinks1 = '<div>
+    $editprojectNavLinks1 = '<div class="editProjectNavContainer">
     <a href="../Webpages/home.php">Home</a>
     <a href="../Processpages/deleteproject.php">Verwijder project</a>
     </div>';
@@ -65,7 +65,7 @@ else
             if ($i == 0)
             {
                 //Edit project name
-                $editProjectContent1 = '<form action="../Processpages/editprojecttoproject.php" method="post">
+                $editProjectContent1 = '<div class="editProjectContainer"><form action="../Processpages/editprojecttoproject.php" method="post">
                 <input type="hidden" name="editId" value="'.$vProjectId.'">
                 <p>Projectnaam</p>
                 <input type="text" name="editProjectName" placeholder="Projectnaam" value="'.$vProjectName.'">';
@@ -185,9 +185,9 @@ else
         }
         echo '
             <input type="hidden" name="counterAddCost" value="'. $i + 1 .'" id="counterAddCostId">
-            </tbody></table>
+            </tbody></table><br>
             <input type="button" onclick="addCostProject()" value="Toevoegen kostenpost">
-            <input type="button" onclick="removeCostProject()" value="Verwijderen kostenpost">   
+            <input type="button" onclick="removeCostProject()" value="Verwijderen kostenpost"><br><br>   
         ';
     }
     else 
@@ -332,7 +332,7 @@ else
     <form action="../Webpages/project.php" method="post">
     <input type="hidden" name="viewId" value="'.$editProjectId.'">
     <input type="submit" name="viewProject" value="Wijzigen verwerpen">
-    </form>';
+    </form></div>';
 }
 ?>
 

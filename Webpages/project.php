@@ -11,13 +11,13 @@ if (!isset($_SESSION["userId"]))
 }
 else 
 {
-    if (isset($_SESSION["viewProjectId"]))
-    {
-        $viewProjectId = $_SESSION["viewProjectId"];
-    }
-    else if (isset($_POST["viewId"]))
+    if (isset($_POST["viewId"]))
     {
         $viewProjectId = $_POST["viewId"];
+    }
+    else if (isset($_SESSION["viewProjectId"]))
+    {
+        $viewProjectId = $_SESSION["viewProjectId"];
     }
     else 
     {
