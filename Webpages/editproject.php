@@ -70,7 +70,7 @@ else
                 <p>Projectnaam</p>
                 <input type="text" name="editProjectName" placeholder="Projectnaam" value="'.$vProjectName.'">';
                 
-                $editProjectContent1 .= '<p>Projectkosten</p>
+                $editProjectContent1 .= '<br><br><p>Projectkosten</p>
                 <table id="tableEditCostId">
                 
                     <thead>
@@ -192,7 +192,7 @@ else
     }
     else 
     {
-        $editProjectContent3 = '<form action="../Processpages/editprojecttoproject.php" method="post">
+        $editProjectContent3 = '<div class="editProjectContainer"><form action="../Processpages/editprojecttoproject.php" method="post">
         <input type="hidden" name="editId" value="'.$editProjectId.'">
         <p>Projectnaam</p>';
 
@@ -207,7 +207,7 @@ else
 
         $editProjectContent3 .= '<input type="text" name="editProjectName" 
         placeholder="Projectnaam" value="'.$pName.'">
-        <p>Projectkosten</p>
+        <br><br><p>Projectkosten</p>
         <table id="tableEditCostId">
             <thead>
                 <tr>
@@ -252,7 +252,7 @@ else
         $editProjectContent3 .= '<input type="hidden" name="counterAddCost" value="1" id="counterAddCostId">
         </tbody></table>
         <input type="button" onclick="addCostProject()" value="Toevoegen kostenpost">
-        <input type="button" onclick="removeCostProject()" value="Verwijderen kostenpost">';
+        <input type="button" onclick="removeCostProject()" value="Verwijderen kostenpost"><br><br>';
         
         echo $editProjectContent3;  
     }
